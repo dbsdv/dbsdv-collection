@@ -29,17 +29,30 @@ async function loadVersion() {
 async function updateSettingsInfo() {
   const versionInfo = await loadVersion();
 
-  document.getElementById("appVersion").textContent = versionInfo.version;
+  const appVersion = document.getElementById("appVersion");
+  const lastUpdatedInfo = document.getElementById("lastUpdatedInfo");
+  const lastAddedCardsInfo = document.getElementById("lastAddedCardsInfo");
+  const cardCountInfo = document.getElementById("cardCountInfo");
+  const ownedCountInfo = document.getElementById("ownedCountInfo");
 
-  document.getElementById("lastUpdatedInfo").textContent =
-    versionInfo.updated || "-";
+  if (appVersion) {
+    appVersion.textContent = versionInfo.version;
+  }
 
-  document.getElementById("lastAddedCardsInfo").textContent =
-    `${versionInfo.addedCards ?? 0}枚`;
+  if (lastUpdatedInfo) {
+    lastUpdatedInfo.textContent = versionInfo.updated || "-";
+  }
 
-  document.getElementById("cardCountInfo").textContent = `${cards.length}枚`;
+  if (lastAddedCardsInfo) {
+    lastAddedCardsInfo.textContent = `${versionInfo.addedCards ?? 0}枚`;
+  }
 
-  const ownedCount = cards.filter((card) => card.owned).length;
+  if (cardCountInfo) {
+    cardCountInfo.textContent = `${cards.length}枚`;
+  }
 
-  document.getElementById("ownedCountInfo").textContent = `${ownedCount}枚`;
+  if (ownedCountInfo) {
+    const ownedCount = cards.filter((card) => card.owned).length;
+    ownedCountInfo.textContent = `${ownedCount}枚`;
+  }
 }
