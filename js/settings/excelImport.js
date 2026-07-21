@@ -135,7 +135,7 @@ document.getElementById("excelFile").addEventListener("change", (e) => {
         : rows;
 
     const ids = dataRows
-      .map(([series, number]) => {
+      .map(([series, number, count]) => {
         if (series == null || number == null) return null;
 
         series = normalizeCell(series);
@@ -144,16 +144,25 @@ document.getElementById("excelFile").addEventListener("change", (e) => {
         // 数字シリーズ
         if (/^\d+$/.test(series)) {
           if (/^\d+$/.test(number)) {
-            return `SDV${series}-${number.padStart(3, "0")}`;
+            return {
+              id: `SDV${series}-${number.padStart(3, "0")}`,
+              count: count ? Number(count) : 1,
+            };
           }
 
-          return `SDV${series}-${number}`;
+          return {
+            id: `SDV${series}-${number}`,
+            count: count ? Number(count) : 1,
+          };
         }
 
         // SDVP / SDVPJ など
         if (/^[A-Z0-9]+$/.test(series)) {
           if (/^\d+$/.test(number)) {
-            return `${series}-${number.padStart(3, "0")}`;
+            return {
+              id: `${series}-${number.padStart(3, "0")}`,
+              count: count ? Number(count) : 1,
+            };
           }
 
           return `${series}-${number}`;
@@ -165,8 +174,8 @@ document.getElementById("excelFile").addEventListener("change", (e) => {
 
     const counts = {};
 
-    ids.forEach((id) => {
-      counts[id] = (counts[id] || 0) + 1;
+    ids.forEach(({ id, count }) => {
+      counts[id] = (counts[id] || 0) + count;
     });
 
     const importCards = [];
