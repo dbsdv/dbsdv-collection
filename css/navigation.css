@@ -2,28 +2,29 @@
    下部ナビゲーション
 ========================== */
 
-.bottom-nav{
-    position:fixed;
-    left:0;
-    bottom:0;
-    width:100%;
-    display:flex;
-    background:#fff;
-    border-top:1px solid #ddd;
-    z-index:1000;
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 1000;
 }
 
-.bottom-nav button{
-    flex:1;
-    border:none;
-    background:none;
-    color:#666;
-    padding:10px 0;
-    font-size:14px;
-    cursor:pointer;
+.bottom-nav button {
+  flex: 1;
+  border: none;
+  background: none;
+  color: #666;
+  padding: 10px 0;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-.bottom-nav button.active{
-    color:#ff7b00;
-    font-weight:bold;
+.bottom-nav button.active {
+  color: #ff7b00;
+  font-weight: bold;
 }
