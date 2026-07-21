@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>DBSDV Collection</title>
+
+    <link rel="icon" type="image/webp" href="images/icon.webp" />
+
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/buttons.css" />
+    <link rel="stylesheet" href="css/settings.css" />
+    <link rel="stylesheet" href="css/filters.css" />
+    <link rel="stylesheet" href="css/cards.css" />
+    <link rel="stylesheet" href="css/deck.css" />
+    <link rel="stylesheet" href="css/collection.css" />
+    <link rel="stylesheet" href="css/navigation.css" />
+    <link rel="stylesheet" href="css/rarity.css" />
+    <link rel="stylesheet" href="css/mobile.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+  </head>
+
+  <body>
+    <div class="header-top">
+      <input type="file" id="restoreFile" accept=".json" hidden />
+    </div>
+
+    <header>
+      <img
+        src="images/logo.webp"
+        alt="ドラゴンボールスーパーダイバーズ図鑑"
+        class="logo"
+      />
+    </header>
+
+    <main>
+      <section id="cardsPage">
+        <section class="filters">
+          <div class="filter-row">
+            <div class="search-group">
+              <input
+                type="text"
+                id="search"
+                placeholder="カード名・カード番号で検索"
+              />
+            </div>
+          </div>
+
+          <div class="filter-row">
+            <div class="select-group">
+              <select id="seriesFilter">
+                <option value="">すべての弾</option>
+              </select>
+
+              <select id="promoFilter" hidden>
+                <option value="">入手方法（すべて）</option>
+              </select>
+
+              <select id="rarityFilter">
+                <option value="">すべてのレアリティ</option>
+              </select>
+
+              <select id="typeFilter">
+                <option value="">すべてのタイプ</option>
+                <option value="B">ブースト</option>
+                <option value="L">リミテッド</option>
+                <option value="I">インパクト</option>
+                <option value="R">ラッシュ</option>
+              </select>
+
+              <select id="actionSkillFilter">
+                <option value="">すべてのアクションスキル</option>
+              </select>
+
+              <button id="resetFilter">リセット</button>
+            </div>
+          </div>
+
+          <div class="filter-row option-row">
+            <label>
+              <input type="checkbox" id="parallelOnly" />
+              パラレルのみ
+            </label>
+
+            <label>
+              <input type="checkbox" id="ownedOnly" />
+              所持カードのみ表示
+            </label>
+
+            <label>
+              <input type="checkbox" id="wantedOnly" />
+              探しているカードのみ
+            </label>
+          </div>
+
+          <div class="result-row">
+            <span id="resultCount"></span>
+          </div>
+        </section>
+
+        <section id="cards"></section>
+      </section>
+
+      <section id="deckPage" hidden>
+        <!-- 一覧画面 -->
+        <div id="deckListPage">
+          <h2>🃏 デッキ</h2>
+
+          <button id="newDeckBtn">＋ 新しいデッキ</button>
+
+          <div id="deckList"></div>
+        </div>
+
+        <!-- 編集画面 -->
+        <div id="deckEditorPage" hidden>
+          <button id="backDeckList">← デッキ一覧へ戻る</button>
+
+          <h2>🃏 デッキ作成</h2>
+
+          <input id="deckName" type="text" placeholder="デッキ名を入力" />
+
+          <div id="deckCardCount">0 / 7枚</div>
+
+          <div id="editorSlots"></div>
+
+          <div class="deck-stats">
+            <h3>📊 デッキステータス</h3>
+
+            <div>❤️ HP：<span id="deckHp">0</span></div>
+
+            <div>⚔️ Power：<span id="deckPower">0</span></div>
+
+            <div>🛡️ Guard：<span id="deckGuard">0</span></div>
+
+            <div>⭐ 戦闘力：<span id="deckTotal">0</span></div>
+          </div>
+
+          <div class="deck-buttons">
+            <button id="saveDeckBtn">💾 デッキを保存</button>
+
+            <button id="resetDeckBtn">🧹 リセット</button>
+          </div>
+
+          <hr />
+
+          <div class="deck-card-select">
+            <h3>カードを選択</h3>
+
+            <div class="filters">
+              <input
+                type="text"
+                id="deckSearch"
+                placeholder="カード名・番号で検索"
+              />
+
+              <div class="filter-row">
+                <div class="select-group">
+                  <select id="deckSeriesFilter">
+                    <option value="">すべて</option>
+                    <option value="11弾">11弾</option>
+                    <option value="10弾">10弾</option>
+                    <option value="9弾">9弾</option>
+                    <option value="8弾">8弾</option>
+                    <option value="7弾">7弾</option>
+                    <option value="6弾">6弾</option>
+                    <option value="5弾">5弾</option>
+                    <option value="4弾">4弾</option>
+                    <option value="3弾">3弾</option>
+                    <option value="2弾">2弾</option>
+                    <option value="1弾">1弾</option>
+                    <option value="ロケーションテスト">
+                      ロケーションテスト
+                    </option>
+                    <option value="プロモーションカード">
+                      プロモーションカード
+                    </option>
+                  </select>
+
+                  <select id="deckRarityFilter">
+                    <option value="">レアリティ（すべて）</option>
+                    <option value="SEC">SEC</option>
+                    <option value="PUR">PUR</option>
+                    <option value="EXR">EXR</option>
+                    <option value="GDR">GDR</option>
+                    <option value="SR">SR</option>
+                    <option value="CP">CP</option>
+                    <option value="PR">PR</option>
+                    <option value="R">R</option>
+                    <option value="N">N</option>
+                  </select>
+
+                  <select id="deckTypeFilter">
+                    <option value="">タイプ（すべて）</option>
+                    <option value="I">インパクト</option>
+                    <option value="R">ラッシュ</option>
+                    <option value="B">ブースト</option>
+                    <option value="L">リミテッド</option>
+                  </select>
+
+                  <select id="deckActionSkillFilter">
+                    <option value="">アクションスキル（すべて）</option>
+                    <option value="覚醒">覚醒</option>
+                    <option value="超覚醒">超覚醒</option>
+                    <option value="巨大化">巨大化</option>
+                    <option value="トライバースト">トライバースト</option>
+                    <option value="ランページアタック">
+                      ランページアタック
+                    </option>
+                    <option value="栽培マン">栽培マン</option>
+                    <option value="バニッシュコンボ">バニッシュコンボ</option>
+                    <option value="ターゲティングボム">
+                      ターゲティングボム
+                    </option>
+                    <option value="一撃">一撃</option>
+                    <option value="カウンターアタック">
+                      カウンターアタック
+                    </option>
+                    <option value="チャージクラッシュ">
+                      チャージクラッシュ
+                    </option>
+                    <option value="リフレクトブレイク">
+                      リフレクトブレイク
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="collectionPage" hidden>
+        <h2>📊 コレクション</h2>
+
+        <div id="collectionCards"></div>
+
+        <div id="collectionDetail"></div>
+      </section>
+
+      <section id="settingsPage" hidden>
+        <h2>⚙️ 設定</h2>
+
+        <div class="setting-card">
+          <h3>💾 データ管理</h3>
+
+          <button id="backupButton" class="btn btn-primary">
+            💾 バックアップ
+          </button>
+
+          <button id="restoreButton" class="btn btn-success">📂 復元</button>
+
+          <button
+            id="importExcelButton"
+            class="btn btn-primary excel-import-button"
+          >
+            📄 Excelでデータ読込
+          </button>
+
+          <input type="file" id="restoreFile" accept=".json" hidden />
+
+          <input type="file" id="excelFile" accept=".xlsx,.xls" hidden />
+        </div>
+
+        <div class="setting-card">
+          <h3>🗑️ 図鑑</h3>
+
+          <button id="resetCollection" class="btn btn-danger">
+            🗑️ 図鑑を初期化
+          </button>
+        </div>
+
+        <div class="setting-card">
+          <h3>ℹ️ アプリ情報</h3>
+
+          <div class="setting-info">
+            <strong>データバージョン</strong>
+            <span id="appVersion">0.1.0</span>
+          </div>
+
+          <div class="setting-info">
+            <strong>データ更新日</strong>
+            <span id="lastUpdatedInfo">-</span>
+          </div>
+
+          <div class="setting-info">
+            <strong>追加カード</strong>
+            <span id="lastAddedCardsInfo">-</span>
+          </div>
+
+          <div class="setting-info">
+            <strong>カード総枚数</strong>
+            <span id="cardCountInfo">-</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- モーダル -->
+
+    <div id="cardModal" class="modal">
+      <div class="modal-content">
+        <button id="closeModal" class="close-btn">✕</button>
+
+        <div class="modal-navigation">
+          <button id="prevCard" class="nav-btn">◀</button>
+
+          <div class="nav-center">
+            <div id="cardCount">1 / 1</div>
+          </div>
+
+          <button id="nextCard" class="nav-btn">▶</button>
+        </div>
+
+        <div class="modal-top">
+          <!-- 左 -->
+
+          <div class="modal-left">
+            <span id="modalNumberMobile"></span>
+
+            <img id="modalImage" src="" alt="カード画像" />
+
+            <div class="image-switch">
+              <button id="showFront">表</button>
+
+              <button id="showBack">裏</button>
+            </div>
+          </div>
+
+          <!-- 右 -->
+
+          <div class="modal-right">
+            <div class="name-rarity">
+              <h2 id="modalName"></h2>
+
+              <span id="modalRarity"></span>
+
+              <div class="card-header-info">
+                <span id="modalNumber"></span>
+              </div>
+            </div>
+
+            <div class="owned-section">
+              <div class="owned-row">
+                <strong>所持</strong>
+
+                <span class="count-control">
+                  <button id="countMinus">－</button>
+
+                  <span id="modalOwnedCount">0</span>
+
+                  <button id="countPlus">＋</button>
+                </span>
+
+                <label class="wanted-inline">
+                  <input type="checkbox" id="modalWanted" />
+
+                  探してる
+                </label>
+              </div>
+            </div>
+
+            <div class="stats">
+              <div>
+                <strong>攻撃方法</strong>
+                <span id="modalAttackType">-</span>
+              </div>
+
+              <div>
+                <strong>HP</strong>
+                <span id="modalHp">-</span>
+              </div>
+
+              <div>
+                <strong>パワー</strong>
+                <span id="modalPower">-</span>
+              </div>
+
+              <div>
+                <strong>ガード</strong>
+                <span id="modalGuard">-</span>
+              </div>
+
+              <div>
+                <strong>初期気力</strong>
+                <span id="modalInitialKi">-</span>
+              </div>
+
+              <div>
+                <strong>必殺技必要エナジー</strong>
+                <span id="modalEnergy">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3>アクションスキル</h3>
+
+          <p id="modalActionSkill"></p>
+        </div>
+
+        <div class="modal-section">
+          <h3>必殺技</h3>
+
+          <p id="modalSpecialMove"></p>
+        </div>
+
+        <div class="modal-section">
+          <h3>スキル</h3>
+
+          <p id="modalSkill"></p>
+        </div>
+
+        <div class="modal-section" id="modalAcquisitionSection">
+          <h3>入手方法</h3>
+
+          <p id="modalAcquisition"></p>
+        </div>
+
+        <div class="modal-section">
+          <h3>メモ</h3>
+
+          <textarea
+            id="modalMemo"
+            rows="4"
+            placeholder="自由にメモできます"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button id="tabCards" class="active">
+        📖<br />
+        図鑑
+      </button>
+
+      <button id="tabDeck">
+        🃏<br />
+        デッキ
+      </button>
+
+      <button id="tabCollection">
+        📊<br />
+        コレクション
+      </button>
+
+      <button id="tabSettings">
+        ⚙️<br />
+        設定
+      </button>
+    </nav>
+
+    <div id="ocrLoadingModal" hidden>
+      <div class="ocr-modal-content">
+        <div class="loading-spinner"></div>
+
+        <h2>🔍 読み取り中…</h2>
+
+        <p id="ocrLoadingMessage">
+          カードを読み取っています。<br />
+          30秒～1分ほどかかる場合があります。
+        </p>
+      </div>
+    </div>
+
+    <div id="excelImportModal" class="ocr-modal" hidden>
+      <div class="ocr-modal-content">
+        <h2>📄 Excel読込確認</h2>
+
+        <div id="excelImportList"></div>
+
+        <div class="ocr-bottom-buttons">
+          <button id="excelImportAddButton">追加</button>
+
+          <button id="excelImportCancelButton">キャンセル</button>
+        </div>
+      </div>
+
+      <!-- ここにExcelモーダルを追加 -->
+      <div id="excelImportModal" class="modal hidden">
+        <div class="modal-content">
+          <h2>Excel読込確認</h2>
+
+          <div id="excelImportList"></div>
+
+          <div class="modal-buttons">
+            <button id="excelImportCancel" class="btn">キャンセル</button>
+
+            <button id="excelImportOk" class="btn btn-primary">追加</button>
+          </div>
+        </div>
+      </div>
+
+      <script src="js/core/storage.js"></script>
+
+      <script src="js/ui/cardFilters.js"></script>
+      <script src="js/ui/cardDetailModal.js"></script>
+
+      <script src="js/pages/cardsPage.js"></script>
+      <script src="js/pages/collectionPage.js"></script>
+      <script src="js/pages/decksPage.js"></script>
+
+      <script src="js/core/navigation.js"></script>
+
+      <script src="js/settings/backup.js"></script>
+      <script src="js/settings/excelImport.js"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+      <script src="js/core/app.js"></script>
+    </div>
+  </body>
+</html>

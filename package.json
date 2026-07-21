@@ -1,0 +1,27 @@
+{
+  "name": "dbsdv-collection",
+  "version": "1.0.0",
+  "description": "Dragon Ball Super Divers collection management tool",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "update": "node tools/update.js"
+  },
+  "keywords": [
+    "dragon-ball",
+    "dbsdv",
+    "card",
+    "collection"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1",
+    "multer": "^2.2.0",
+    "playwright": "^1.61.1",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.35.3",
+    "xlsx": "^0.18.5"
+  }
+}

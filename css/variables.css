@@ -1,0 +1,26 @@
+:root {
+
+    /* Colors */
+    --primary: #1976d2;
+    --success: #43a047;
+    --danger: #e53935;
+
+    --background: #f5f5f5;
+    --surface: #ffffff;
+    --border: #dddddd;
+
+    --text: #222222;
+    --text-light: #666666;
+
+    /* Radius */
+    --radius: 12px;
+
+    /* Shadow */
+    --shadow: 0 2px 8px rgba(0,0,0,.08);
+
+    /* Animation */
+    --transition: .2s;
+
+    --border-light: #eeeeee;
+
+}

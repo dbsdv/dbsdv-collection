@@ -1,0 +1,40 @@
+/* ==========================
+   レアリティカラー
+========================== */
+
+.rarity-N{
+    background:#9e9e9e;
+}
+
+.rarity-R{
+    background:#ff9800;
+}
+
+.rarity-SR{
+    background:#8e24aa;
+}
+
+.rarity-GDR{
+    background:#9c27b0;
+}
+
+.rarity-EXR{
+    background:#d4af37;
+    color:#000;
+}
+
+.rarity-PUR{
+    background:#3949ab;
+}
+
+.rarity-PR{
+    background:#43a047;
+}
+
+.rarity-CP{
+    background:#00acc1;
+}
+
+.rarity-SEC{
+    background:#e53935;
+}

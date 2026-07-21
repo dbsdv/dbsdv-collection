@@ -1,0 +1,44 @@
+/* ==========================
+   ベース
+========================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 20px 20px 70px;
+  font-family: "Yu Gothic UI", sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* ==========================
+   ヘッダー
+========================== */
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.logo {
+  height: 100px;
+  width: auto;
+}
+
+header {
+  text-align: center;
+}

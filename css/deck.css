@@ -1,0 +1,191 @@
+/* ==========================
+   デッキ一覧
+========================== */
+
+#newDeckBtn{
+    width:100%;
+    padding:15px;
+    font-size:18px;
+    border:none;
+    border-radius:12px;
+    background:#ff9800;
+    color:white;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+#deckList{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.deck-card{
+    background:#fff;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    cursor:pointer;
+}
+
+.deck-card h3{
+    margin:0 0 10px;
+}
+
+.deck-slots{
+    display:flex;
+    gap:10px;
+    margin:15px 0;
+}
+
+.deck-slot{
+    width:42px;
+    aspect-ratio:63 / 88;
+    border:2px dashed #bbb;
+    border-radius:6px;
+    background:#fafafa;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+}
+
+.deck-count{
+    text-align:right;
+    color:#666;
+}
+
+.deck-actions{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.deck-actions button{
+    flex:1;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.edit-deck{
+    background:#4caf50;
+    color:white;
+}
+
+.delete-deck{
+    background:#f44336;
+    color:white;
+}
+
+/* ==========================
+   デッキ編集
+========================== */
+
+#editorSlots{
+    display:flex;
+    gap:10px;
+    margin:25px 0;
+}
+
+.editor-slot{
+    position:relative;
+    width:42px;
+    height:59px;
+    border:2px dashed #bbb;
+    border-radius:6px;
+}
+
+#editorCardList{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:20px;
+}
+
+.card-select{
+    padding:4px;
+    min-width:0;
+    overflow:hidden;
+}
+
+.card-select img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+}
+
+.card-select .card-name{
+    font-size:14px;
+}
+
+.card-select .card-id{
+    font-size:13px;
+
+}
+
+.deck-slot-image{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:6px;
+}
+
+.remove-card-btn{
+    position:absolute;
+    top:-10px;
+    right:-10px;
+    width:22px;
+    height:22px;
+    border:none;
+    border-radius:50%;
+    background:#ff4d4f;
+    color:white;
+    cursor:pointer;
+    z-index:10;
+}
+
+/* ==========================
+   ボタン
+========================== */
+
+#saveDeckBtn{
+    flex:1;
+    margin-top:20px;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#2196f3;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#saveDeckBtn:hover{
+    background:#1976d2;
+}
+
+.deck-buttons{
+    display:flex;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.deck-buttons button{
+    flex: 1;
+}
+
+#resetDeckBtn{
+    flex:1;
+    margin-top:20px;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#f44336;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}

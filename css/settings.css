@@ -1,0 +1,104 @@
+.setting-card {
+  max-width: 600px;
+
+  margin: 20px auto;
+
+  padding: 20px;
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  background: var(--surface);
+
+  box-shadow: var(--shadow);
+}
+
+.setting-card h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.setting-card button {
+  width: 100%;
+
+  margin-bottom: 12px;
+
+  padding: 12px;
+
+  font-size: 16px;
+
+  cursor: pointer;
+}
+
+.setting-info {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 10px 0;
+
+  border-bottom: 1px solid var(--border-light);
+}
+
+.setting-info:last-child {
+  border-bottom: none;
+}
+
+/* ===== Excel読込 ===== */
+
+.excel-import-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 14px;
+  margin-bottom: 8px;
+
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 8px;
+
+  background: var(--card-bg, #fff);
+}
+
+.excel-import-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.excel-import-id {
+  font-size: 12px;
+  color: #777;
+}
+
+.excel-import-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.excel-import-count {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.excel-import-unknown {
+  border-color: #dc3545;
+  background: #fff5f5;
+}
+
+.excel-import-summary {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+}
+
+.excel-import-button {
+  background: #fb8c00;
+}
+
+.excel-import-button:hover {
+  background: #ef6c00;
+}
