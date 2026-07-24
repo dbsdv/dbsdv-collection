@@ -145,6 +145,7 @@ document.getElementById("updateButton").addEventListener("click", async () => {
   const versionInfo = await loadVersion();
 
   localStorage.setItem("appVersion", versionInfo.version);
+  sessionStorage.setItem("lastPage", "settings");
 
   location.reload();
 });

@@ -55,6 +55,19 @@ async function updateSettingsInfo() {
     latestVersion.textContent = versionInfo.version;
   }
 
+  const updateStatus = document.getElementById("updateStatus");
+  const updateButton = document.getElementById("updateButton");
+
+  if (updateStatus && updateButton) {
+    if (savedVersion === versionInfo.version) {
+      updateStatus.textContent = "✅ 最新版です";
+      updateButton.style.display = "none";
+    } else {
+      updateStatus.textContent = "🟠 更新があります";
+      updateButton.style.display = "block";
+    }
+  }
+
   if (lastUpdatedInfo) {
     lastUpdatedInfo.textContent = versionInfo.updated || "-";
   }

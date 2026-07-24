@@ -196,12 +196,6 @@ function renderEditorSlots() {
 }
 
 function addCardToEditingDeck(card) {
-  if (editingDeck.cards.some((c) => c?.name === card.name)) {
-    alert("同じカード名はデッキに1枚までです！");
-
-    return false;
-  }
-
   if (card.type === "L") {
     const limitedCount = editingDeck.cards.filter(
       (c) => c?.type === "L",
@@ -281,7 +275,7 @@ function updateDeckStats() {
   document.getElementById("deckHp").textContent = hp;
   document.getElementById("deckPower").textContent = power;
   document.getElementById("deckGuard").textContent = guard;
-  document.getElementById("deckTotal").textContent = hp + power + guard;
+  // document.getElementById("deckTotal").textContent = hp + power + guard;
 
   const count = editingDeck.cards.filter((card) => card !== null).length;
 

@@ -146,7 +146,12 @@
 
             <div>🛡️ Guard：<span id="deckGuard">0</span></div>
 
-            <div>⭐ 戦闘力：<span id="deckTotal">0</span></div>
+            <!--
+<div>
+  ⭐ 戦闘力：
+  <span id="deckTotal"></span>
+</div>
+-->
           </div>
 
           <div class="deck-buttons">
@@ -302,10 +307,10 @@
         </div>
 
         <div class="setting-card">
-          <h3>ℹ️ アプリ情報</h3>
+          <h3>🃏 カードデータ情報</h3>
 
           <div class="setting-info">
-            <strong>データバージョン</strong>
+            <strong>カードデータバージョン</strong>
             <span id="appVersion">0.1.0</span>
           </div>
 
@@ -326,10 +331,19 @@
         </div>
 
         <div class="setting-card update-card">
-  <h3>🆕 アプリ更新</h3>
+  <h3>📱 アプリ情報</h3>
 
-  <p>現在のバージョン：<span id="currentVersion">0.2.6</span></p>
-  <p>最新バージョン：<span id="latestVersion">0.2.7</span></p>
+<div class="setting-info">
+  <strong>現在のバージョン</strong>
+  <span id="currentVersion"></span>
+</div>
+
+<div class="setting-info">
+  <strong>最新のバージョン</strong>
+  <span id="latestVersion"></span>
+</div>
+
+<div id="updateStatus" class="update-status"></div>
 
   <button id="updateButton" class="btn btn-primary">
     🏠 アップデート

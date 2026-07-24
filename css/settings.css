@@ -106,3 +106,8 @@
 .update-card {
   margin-top: 24px;
 }
+
+.update-status {
+  margin: 16px 0;
+  font-weight: bold;
+}

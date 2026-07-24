@@ -227,9 +227,8 @@ async function loadCards() {
     const ok = confirm(
       `図鑑を初期化しますか？
 
-所持カード・「探している」・メモの情報がすべて削除されます。
+所持カード・「探している」・メモ・デッキの情報がすべて削除されます。
 
-※ デッキは削除されません。
 この操作は元に戻せません。`,
     );
 
@@ -249,12 +248,15 @@ async function loadCards() {
     document.getElementById("wantedOnly").checked = false;
     document.getElementById("search").value = "";
 
+    decks = [];
+    saveDecks();
+
     saveCardData();
 
     renderCards();
 
-    updateCollectionSummary();
     renderCollection();
+    renderDecks();
   });
 }
 
