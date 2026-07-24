@@ -1,4 +1,4 @@
-const CACHE_NAME = "dbsdv-build-5";
+const CACHE_NAME = "dbsdv-build-6";
 
 const STATIC_FILES = ["./", "./index.html", "./manifest.json"];
 
@@ -33,6 +33,11 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
   const url = new URL(event.request.url);
+
+  // http/https 以外はキャッシュしない
+  if (url.protocol !== "http:" && url.protocol !== "https:") {
+    return;
+  }
 
   // index.html は毎回ネット優先
   if (
