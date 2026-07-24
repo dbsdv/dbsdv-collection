@@ -1,4 +1,4 @@
-const CACHE_NAME = "dbsdv-v2";
+const CACHE_NAME = "dbsdv-v3";
 
 const FILES = ["./", "./index.html", "./manifest.json"];
 
@@ -11,8 +11,6 @@ self.addEventListener("install", (event) => {
 
   self.skipWaiting();
 });
-
-self.skipWaiting();
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
