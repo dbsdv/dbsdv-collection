@@ -24,7 +24,9 @@ ownedOnly.addEventListener("change", filterCards);
     console.log("自動バックアップ実行");
     createAutoBackup();
 
-    alert(`新しいバージョンがあります。\nバックアップを作成しました。`);
+    alert(
+      "新しいバージョンがあります。\n\n更新前にバックアップファイルをダウンロードします。\n問題があれば、このファイルから復元できます。",
+    );
   }
 
   localStorage.setItem("appVersion", versionInfo.version);
