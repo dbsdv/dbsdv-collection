@@ -1,4 +1,4 @@
-const CACHE_NAME = "dbsdv-build-6";
+const CACHE_NAME = "dbsdv-build-7";
 
 const STATIC_FILES = ["./", "./index.html", "./manifest.json"];
 
@@ -79,4 +79,11 @@ self.addEventListener("fetch", (event) => {
       return cached || networkFetch;
     }),
   );
+});
+
+// アプリ側から「今すぐ新しい Service Worker を有効化して」と言われたら実行
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });

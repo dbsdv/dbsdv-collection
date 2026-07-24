@@ -568,6 +568,9 @@
       <script src="js/core/app.js"></script>
 
 <script>
+
+let waitingWorker = null;
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", async () => {
     try {
@@ -575,6 +578,31 @@ if ("serviceWorker" in navigator) {
 
       // 起動時に必ず更新確認
       registration.update();
+
+      // 新しい Service Worker を検知
+registration.addEventListener("updatefound", () => {
+  const newWorker = registration.installing;
+  if (!newWorker) return;
+
+  newWorker.addEventListener("statechange", () => {
+  if (
+    newWorker.state === "installed" &&
+    navigator.serviceWorker.controller
+  ) {
+
+    waitingWorker = newWorker;
+
+document.getElementById("updateStatus").textContent =
+  "🟢 新しいバージョンがあります";
+
+document.getElementById("updateButton").style.display = "block";
+
+alert("新しいバージョンがあります。\n設定タブから更新してください。");
+
+  }
+});
+});
+
     } catch (e) {
       console.error("Service Worker registration failed:", e);
     }
