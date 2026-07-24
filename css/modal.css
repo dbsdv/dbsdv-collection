@@ -345,41 +345,6 @@
     font-size: 12px !important;
   }
 
-  /* スマホ 所持管理 */
-  .owned-row {
-    gap: 3px;
-    justify-content: center;
-  }
-
-  .owned-row strong {
-    font-size: 12px;
-  }
-
-  .count-control {
-    gap: 4px;
-  }
-
-  .count-control button {
-    width: 18px;
-    height: 18px;
-    font-size: 11px;
-    padding: 0;
-    border-radius: 4px;
-  }
-
-  #modalOwnedCount {
-    min-width: 16px;
-    font-size: 13px;
-  }
-
-  .wanted-inline {
-    font-size: 12px;
-    gap: 3px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-left: 10px;
-  }
-
   @media (max-width: 850px) {
     #modalName {
       font-size: 18px !important;
@@ -406,15 +371,6 @@
     font-size: 14px;
     color: #777;
     font-weight: bold;
-  }
-
-  /* ==========================================
-   所持管理
-========================================== */
-  .owned-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
   }
 
   /* ==========================================
@@ -457,16 +413,6 @@
   background: var(--surface);
 }
 
-.owned-row {
-  gap: 6px;
-  flex-wrap: nowrap;
-}
-
-.wanted-inline {
-  margin-left: 40px;
-  width: auto;
-}
-
 .owned-row strong {
   min-width: auto;
 }
@@ -483,6 +429,32 @@
     width: 100%;
     margin-top: 8px;
   }
+}
+
+/* ==========================================
+   所持管理（2段表示）
+========================================== */
+
+.owned-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.owned-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12px;
+  gap: 24px;
+}
+
+.wanted-inline {
+  margin-left: 0;
+  width: auto;
+  white-space: nowrap;
 }
 
 /* ==========================================

@@ -397,30 +397,31 @@
               </div>
             </div>
 
-            <div class="owned-section">
-              <div class="owned-row">
-                <strong>所持</strong>
+<div class="owned-section">
+  <div class="owned-row">
+    <strong>所持</strong>
 
-                <span class="count-control">
-                  <button id="countMinus">－</button>
+    <span class="count-control">
+      <button id="countMinus">－</button>
 
-                  <span id="modalOwnedCount">0</span>
+      <span id="modalOwnedCount">0</span>
 
-                  <button id="countPlus">＋</button>
-                </span>
+      <button id="countPlus">＋</button>
+    </span>
+  </div>
 
-                <label class="wanted-inline">
-                  <input type="checkbox" id="modalWanted" />
+  <div class="owned-row owned-options">
+    <label class="wanted-inline">
+      <input type="checkbox" id="modalWanted" />
+      探してる
+    </label>
 
-                  探してる
-                </label>
-
-                <label class="wanted-inline">
-                  <input type="checkbox" id="modalUnopened" />
-                  📦 未開封
-                </label>
-              </div>
-            </div>
+    <label class="wanted-inline">
+      <input type="checkbox" id="modalUnopened" />
+      📦 未開封
+    </label>
+  </div>
+</div>
 
             <div class="stats">
               <div>
@@ -518,19 +519,6 @@
         設定
       </button>
     </nav>
-
-    <div id="ocrLoadingModal" hidden>
-      <div class="ocr-modal-content">
-        <div class="loading-spinner"></div>
-
-        <h2>🔍 読み取り中…</h2>
-
-        <p id="ocrLoadingMessage">
-          カードを読み取っています。<br />
-          30秒～1分ほどかかる場合があります。
-        </p>
-      </div>
-    </div>
 
     <div id="excelImportModal" class="ocr-modal" hidden>
       <div class="ocr-modal-content">
