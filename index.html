@@ -272,7 +272,7 @@
       <section id="settingsPage" hidden>
         <h2>⚙️ 設定</h2>
 
-        <div class="setting-card">
+        <div class="setting-card update-card">
           <h3>💾 データ管理</h3>
 
           <button id="backupButton" class="btn btn-primary">
@@ -324,6 +324,18 @@
             <span id="cardCountInfo">-</span>
           </div>
         </div>
+
+        <div class="setting-card update-card">
+  <h3>🆕 アプリ更新</h3>
+
+  <p>現在のバージョン：<span id="currentVersion">0.2.6</span></p>
+  <p>最新バージョン：<span id="latestVersion">0.2.7</span></p>
+
+  <button id="updateButton" class="btn btn-primary">
+    🏠 アップデート
+  </button>
+</div>
+
       </section>
     </main>
 
@@ -482,12 +494,10 @@
         コレクション
       </button>
 
-      <!--
-<button id="tabUnopened">
-  📦<br />
-  未開封
-</button>
--->
+      <button id="tabUnopened">
+        📦<br />
+        未開封
+      </button>
 
       <button id="tabSettings">
         ⚙️<br />

@@ -11,6 +11,8 @@ const tabUnopened = document.getElementById("tabUnopened");
 const tabSettings = document.getElementById("tabSettings");
 
 function showPage(page) {
+  localStorage.setItem("lastPage", page);
+
   cardsPage.hidden = true;
   deckPage.hidden = true;
   collectionPage.hidden = true;
@@ -73,3 +75,11 @@ tabUnopened.addEventListener("click", () => {
   console.log("未開封クリック");
   showPage("unopened");
 });
+
+const lastPage = localStorage.getItem("lastPage");
+
+if (lastPage) {
+  showPage(lastPage);
+} else {
+  showPage("cards");
+}

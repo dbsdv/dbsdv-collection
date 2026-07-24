@@ -102,3 +102,7 @@
 .excel-import-button:hover {
   background: #ef6c00;
 }
+
+.update-card {
+  margin-top: 24px;
+}

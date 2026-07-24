@@ -21,15 +21,8 @@ ownedOnly.addEventListener("change", filterCards);
   const versionInfo = await loadVersion();
 
   if (savedVersion && savedVersion !== versionInfo.version) {
-    console.log("自動バックアップ実行");
-    createAutoBackup();
-
-    alert(
-      "新しいバージョンがあります。\n\n更新前にバックアップファイルをダウンロードします。\n問題があれば、このファイルから復元できます。",
-    );
+    alert("🆕 更新情報があります。\n\n設定からアップデートできます。");
   }
-
-  localStorage.setItem("appVersion", versionInfo.version);
 
   // saveCardData();
   updateSettingsInfo();
@@ -44,14 +37,22 @@ async function loadVersion() {
 async function updateSettingsInfo() {
   const versionInfo = await loadVersion();
 
-  const appVersion = document.getElementById("appVersion");
+  const currentVersion = document.getElementById("currentVersion");
+  const latestVersion = document.getElementById("latestVersion");
+
   const lastUpdatedInfo = document.getElementById("lastUpdatedInfo");
   const lastAddedCardsInfo = document.getElementById("lastAddedCardsInfo");
   const cardCountInfo = document.getElementById("cardCountInfo");
   const ownedCountInfo = document.getElementById("ownedCountInfo");
 
-  if (appVersion) {
-    appVersion.textContent = versionInfo.version;
+  const savedVersion = localStorage.getItem("appVersion") || "-";
+
+  if (currentVersion) {
+    currentVersion.textContent = savedVersion;
+  }
+
+  if (latestVersion) {
+    latestVersion.textContent = versionInfo.version;
   }
 
   if (lastUpdatedInfo) {

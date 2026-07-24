@@ -140,3 +140,11 @@ document.getElementById("excelFile").addEventListener("change", (e) => {
 
   console.log(file);
 });
+
+document.getElementById("updateButton").addEventListener("click", async () => {
+  const versionInfo = await loadVersion();
+
+  localStorage.setItem("appVersion", versionInfo.version);
+
+  location.reload();
+});
