@@ -10,6 +10,8 @@
 
     <title>DBSDV Collection</title>
 
+    <link rel="manifest" href="manifest.json">
+
     <link rel="icon" type="image/webp" href="images/icon.webp" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
 
@@ -538,6 +540,12 @@
       <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
       <script src="js/core/app.js"></script>
+
+      <script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./service-worker.js");
+}
+</script>
 
   </body>
 </html>

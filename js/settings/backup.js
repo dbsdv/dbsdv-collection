@@ -39,6 +39,24 @@ function backupData() {
   }
 }
 
+function createAutoBackup() {
+  const backup = {
+    version: 1,
+    createdAt: new Date().toISOString(),
+    data: {},
+  };
+
+  ["cardData", "decks", "unopenedPacks"].forEach((key) => {
+    const value = localStorage.getItem(key);
+
+    if (value) {
+      backup.data[key] = JSON.parse(value);
+    }
+  });
+
+  localStorage.setItem("autoBackup", JSON.stringify(backup));
+}
+
 function restoreData(file) {
   const reader = new FileReader();
 

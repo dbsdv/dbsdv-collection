@@ -16,6 +16,19 @@ ownedOnly.addEventListener("change", filterCards);
 
   renderDecks();
 
+  const savedVersion = localStorage.getItem("appVersion");
+
+  const versionInfo = await loadVersion();
+
+  if (savedVersion && savedVersion !== versionInfo.version) {
+    console.log("自動バックアップ実行");
+    createAutoBackup();
+
+    alert(`新しいバージョンがあります。\nバックアップを作成しました。`);
+  }
+
+  localStorage.setItem("appVersion", versionInfo.version);
+
   // saveCardData();
   updateSettingsInfo();
 })();
