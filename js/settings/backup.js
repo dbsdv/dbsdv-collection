@@ -54,7 +54,34 @@ function createAutoBackup() {
     }
   });
 
-  localStorage.setItem("autoBackup", JSON.stringify(backup));
+  const blob = new Blob([JSON.stringify(backup, null, 2)], {
+    type: "application/json",
+  });
+
+  const url = URL.createObjectURL(blob);
+
+  const date = new Date();
+
+  const filename = `DBSDV_AutoBackup_${date.getFullYear()}-${String(
+    date.getMonth() + 1,
+  ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}_${String(
+    date.getHours(),
+  ).padStart(2, "0")}-${String(date.getMinutes()).padStart(2, "0")}-${String(
+    date.getSeconds(),
+  ).padStart(2, "0")}.json`;
+
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = filename;
+
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(url);
+
+  console.log("Auto backup downloaded:", filename);
 }
 
 function restoreData(file) {
