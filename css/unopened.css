@@ -58,7 +58,10 @@
 }
 
 #newPackName {
-  font-size: 16px;
+  height: 44px;
+  padding: 0 12px;
+  font-size: 18px;
+  box-sizing: border-box;
 }
 
 #addPackBtn {
