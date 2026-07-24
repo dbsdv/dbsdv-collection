@@ -569,7 +569,11 @@
 
 <script>
 
-let waitingWorker = null;
+window.waitingWorker = null;
+
+navigator.serviceWorker.addEventListener("controllerchange", () => {
+  window.location.reload();
+});
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", async () => {
@@ -590,7 +594,7 @@ registration.addEventListener("updatefound", () => {
     navigator.serviceWorker.controller
   ) {
 
-    waitingWorker = newWorker;
+    window.waitingWorker = newWorker;
 
 document.getElementById("updateStatus").textContent =
   "🟢 新しいバージョンがあります";

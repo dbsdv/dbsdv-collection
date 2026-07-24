@@ -147,5 +147,11 @@ document.getElementById("updateButton").addEventListener("click", async () => {
   localStorage.setItem("appVersion", versionInfo.version);
   sessionStorage.setItem("lastPage", "settings");
 
-  location.reload();
+  if (window.waitingWorker) {
+    window.waitingWorker.postMessage({
+      type: "SKIP_WAITING",
+    });
+  } else {
+    location.reload();
+  }
 });
