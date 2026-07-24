@@ -1,62 +1,43 @@
 function saveCardData() {
+  const cardData = {};
 
-    const cardData = {};
+  cards.forEach((card) => {
+    cardData[card.id] = {
+      count: card.count ?? (card.owned ? 1 : 0),
+      unopened: card.unopened ?? false,
+      wanted: card.wanted ?? false,
+      memo: card.memo ?? "",
+    };
+  });
 
-    cards.forEach(card => {
-
-        cardData[card.id] = {
-
-            count: card.count ?? (card.owned ? 1 : 0),
-            wanted: card.wanted ?? false,
-            memo: card.memo ?? ""
-
-        };
-
-    });
-
-    localStorage.setItem(
-        "cardData",
-        JSON.stringify(cardData)
-    );
-
+  localStorage.setItem("cardData", JSON.stringify(cardData));
 }
 
 function loadCardData() {
+  const savedCards = localStorage.getItem("cardData");
 
-    const savedCards = localStorage.getItem("cardData");
+  if (!savedCards) return;
+  const cardData = JSON.parse(savedCards);
 
-    if (!savedCards) return;
-    const cardData = JSON.parse(savedCards);
+  cards.forEach((card) => {
+    if (!cardData[card.id]) return;
 
-    cards.forEach(card => {
-
-        if (!cardData[card.id]) return;
-
-        card.count = cardData[card.id].count ?? (cardData[card.id].owned ? 1 : 0);
-card.owned = card.count > 0;
-        card.wanted = cardData[card.id].wanted ?? false;
-        card.memo = cardData[card.id].memo ?? "";
-
-    });
-
+    card.count = cardData[card.id].count ?? (cardData[card.id].owned ? 1 : 0);
+    card.owned = card.count > 0;
+    card.unopened = cardData[card.id].unopened ?? false;
+    card.wanted = cardData[card.id].wanted ?? false;
+    card.memo = cardData[card.id].memo ?? "";
+  });
 }
 
 function saveDecks() {
-
-    localStorage.setItem(
-        "decks",
-        JSON.stringify(decks)
-    );
-
+  localStorage.setItem("decks", JSON.stringify(decks));
 }
 
 function loadDecks() {
+  const savedDecks = localStorage.getItem("decks");
 
-    const savedDecks = localStorage.getItem("decks");
+  if (!savedDecks) return;
 
-    if (!savedDecks) return;
-
-    decks = JSON.parse(savedDecks);
-
+  decks = JSON.parse(savedDecks);
 }
-

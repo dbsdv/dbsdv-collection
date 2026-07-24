@@ -15,10 +15,12 @@ const versionPath = path.join(__dirname, "../version.json");
 
 function loadVersion() {
   if (!fs.existsSync(versionPath)) {
-    return "0.1.0";
+    return {
+      version: "0.1.0",
+    };
   }
 
-  return JSON.parse(fs.readFileSync(versionPath, "utf8")).version;
+  return JSON.parse(fs.readFileSync(versionPath, "utf8"));
 }
 
 function saveVersion(version, addedCards) {
@@ -125,11 +127,13 @@ async function main() {
     const parallelCards = newCards.filter((card) => /p_\d+$/.test(card.id));
     console.log(`新規カード：${newCards.length}枚`);
 
+    let newVersion = null;
+
     if (newCards.length > 0) {
       const versionInfo = loadVersion();
 
       const oldVersion = versionInfo.version;
-      const newVersion = incrementVersion(oldVersion);
+      newVersion = incrementVersion(oldVersion);
 
       console.log(`📦 Version ${oldVersion} → ${newVersion}`);
 
@@ -170,13 +174,13 @@ async function main() {
     buildCardsJson(allCards);
 
     if (newCards.length > 0) {
-      saveVersion(newVersion);
+      saveVersion(newVersion, newCards.length);
     }
 
     console.log(`
 ================================
 🎉 更新完了！
-Version : ${currentVersion}
+Version : ${newVersion}
 追加カード : ${newCards.length}枚
 cards.json を更新しました。
 ================================

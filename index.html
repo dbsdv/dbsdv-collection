@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="css/rarity.css" />
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/modal.css" />
+    <link rel="stylesheet" href="css/unopened.css">
   </head>
 
   <body>
@@ -164,6 +165,11 @@
                 placeholder="カード名・番号で検索"
               />
 
+              <label>
+  <input type="checkbox" id="deckOwnedOnly" />
+  所持カードのみ
+</label>
+
               <div class="filter-row">
                 <div class="select-group">
                   <select id="deckSeriesFilter">
@@ -247,6 +253,18 @@
         <div id="collectionCards"></div>
 
         <div id="collectionDetail"></div>
+      </section>
+
+      <section id="unopenedPage" hidden>
+        <h2>📦 未開封パック</h2>
+
+        <div class="unopened-add">
+          <input type="text" id="newPackName" placeholder="パック名を入力" />
+
+          <button id="addPackButton">追加</button>
+        </div>
+
+        <div id="unopenedPackList"></div>
       </section>
 
       <section id="settingsPage" hidden>
@@ -368,6 +386,11 @@
 
                   探してる
                 </label>
+
+                <label class="wanted-inline">
+                  <input type="checkbox" id="modalUnopened" />
+                  📦 未開封
+                </label>
               </div>
             </div>
 
@@ -457,6 +480,11 @@
         コレクション
       </button>
 
+      <button id="tabUnopened">
+        📦<br />
+        未開封
+      </button>
+
       <button id="tabSettings">
         ⚙️<br />
         設定
@@ -489,19 +517,7 @@
         </div>
       </div>
 
-      <!-- ここにExcelモーダルを追加 -->
-      <div id="excelImportModal" class="modal hidden">
-        <div class="modal-content">
-          <h2>Excel読込確認</h2>
-
-          <div id="excelImportList"></div>
-
-          <div class="modal-buttons">
-            <button id="excelImportCancel" class="btn">キャンセル</button>
-
-            <button id="excelImportOk" class="btn btn-primary">追加</button>
-          </div>
-        </div>
+      </div>
       </div>
 
       <script src="js/core/storage.js"></script>
@@ -512,6 +528,7 @@
       <script src="js/pages/cardsPage.js"></script>
       <script src="js/pages/collectionPage.js"></script>
       <script src="js/pages/decksPage.js"></script>
+      <script src="js/pages/unopenedPage.js"></script>
 
       <script src="js/core/navigation.js"></script>
 
@@ -521,6 +538,6 @@
       <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
       <script src="js/core/app.js"></script>
-    </div>
+
   </body>
 </html>

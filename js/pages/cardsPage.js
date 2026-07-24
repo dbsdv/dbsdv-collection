@@ -290,6 +290,8 @@ function getPromoCategory(acquisition = "") {
 }
 
 function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
+  console.log(cards.find((c) => c.unopened));
+
   const container = document.getElementById(targetId);
   container.innerHTML = "";
 
@@ -322,7 +324,11 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
 
   const parallelOnly = document.getElementById("parallelOnly").checked;
 
-  const ownedOnly = document.getElementById("ownedOnly").checked;
+  const ownedOnly =
+    mode === "select"
+      ? document.getElementById("deckOwnedOnly").checked
+      : document.getElementById("ownedOnly").checked;
+
   const wantedOnly = document.getElementById("wantedOnly").checked;
 
   const searchInput =
@@ -398,15 +404,14 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
       return;
     }
 
-    if (mode === "detail") {
-      if (ownedOnly && !card.owned) {
-        return;
-      }
-
-      if (wantedOnly && !card.wanted) {
-        return;
-      }
+    if (ownedOnly && !card.owned) {
+      return;
     }
+
+    if (mode === "detail" && wantedOnly && !card.wanted) {
+      return;
+    }
+
     const searchText = normalize(
       `${card.id}
      ${card.displayId ?? ""}
@@ -451,7 +456,7 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
     }
 
 <span class="card-id">
-    ${card.displayId ?? card.id}
+    ${card.displayId ?? card.id}${card.unopened ? " 📦" : ""}
 </span>
 
     </div>
@@ -468,9 +473,9 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
     onerror="this.src='images/noimage.jpg'"
 >
 
-            <div class="card-name">
-                ${card.name}
-            </div>
+<div class="card-name">
+    ${card.name}
+</div>
         `;
 
     const img = cardDiv.querySelector("img");

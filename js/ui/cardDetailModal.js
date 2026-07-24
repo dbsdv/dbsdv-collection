@@ -20,12 +20,14 @@ const modalActionSkill = document.getElementById("modalActionSkill");
 const modalSpecialMove = document.getElementById("modalSpecialMove");
 const modalSkill = document.getElementById("modalSkill");
 
+const modalWanted = document.getElementById("modalWanted");
+const modalUnopened = document.getElementById("modalUnopened");
+
 const modalAcquisition = document.getElementById("modalAcquisition");
 const modalAcquisitionSection = document.getElementById(
   "modalAcquisitionSection",
 );
 
-const modalWanted = document.getElementById("modalWanted");
 const modalMemo = document.getElementById("modalMemo");
 
 const closeModal = document.getElementById("closeModal");
@@ -111,6 +113,7 @@ function showCardDetail(card, list = cards) {
   modalSpecialMove.textContent = card.specialMove || "-";
   modalSkill.textContent = card.skill || "-";
   modalWanted.checked = card.wanted ?? false;
+  modalUnopened.checked = card.unopened ?? false;
 
   if (card.rarity === "CP" || card.rarity === "PR") {
     modalAcquisitionSection.style.display = "";
@@ -295,6 +298,15 @@ modalWanted.addEventListener("change", () => {
   currentCard.wanted = modalWanted.checked;
 
   saveCardData();
+});
+
+modalUnopened.addEventListener("change", () => {
+  if (!currentCard) return;
+
+  currentCard.unopened = modalUnopened.checked;
+
+  saveCardData();
+  renderCards();
 });
 
 modalMemo.addEventListener("input", () => {
