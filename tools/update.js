@@ -24,6 +24,8 @@ function loadVersion() {
 }
 
 function saveVersion(version, addedCards) {
+  const current = loadVersion();
+
   fs.writeFileSync(
     versionPath,
     JSON.stringify(
@@ -31,6 +33,7 @@ function saveVersion(version, addedCards) {
         version,
         updated: new Date().toLocaleString("ja-JP"),
         addedCards,
+        build: current.build ?? 0,
       },
       null,
       4,
