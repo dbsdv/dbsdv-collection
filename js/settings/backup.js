@@ -10,7 +10,7 @@ function backupData() {
 
     // DBSDV関連だけ保存
     Object.keys(localStorage).forEach((key) => {
-      if (key === "cardData" || key === "decks") {
+      if (key === "cardData" || key === "decks" || key === "unopenedPacks") {
         backup.data[key] = JSON.parse(localStorage.getItem(key));
       }
     });
@@ -79,7 +79,9 @@ function createAutoBackup() {
   a.click();
   a.remove();
 
-  URL.revokeObjectURL(url);
+  setTimeout(() => {
+    URL.revokeObjectURL(url);
+  }, 1000);
 
   console.log("Auto backup downloaded:", filename);
 }

@@ -251,6 +251,10 @@ async function loadCards() {
     decks = [];
     saveDecks();
 
+    localStorage.removeItem("unopenedPacks");
+    unopenedPacks = [];
+    renderUnopenedPacks();
+
     saveCardData();
 
     renderCards();
