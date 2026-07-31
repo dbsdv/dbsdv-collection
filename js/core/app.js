@@ -16,14 +16,6 @@ ownedOnly.addEventListener("change", filterCards);
 
   renderDecks();
 
-  const savedVersion = localStorage.getItem("appVersion");
-
-  const versionInfo = await loadVersion();
-
-  if (savedVersion && savedVersion !== versionInfo.version) {
-    alert("🆕 更新情報があります。\n\n設定からアップデートできます。");
-  }
-
   // saveCardData();
   updateSettingsInfo();
 })();
