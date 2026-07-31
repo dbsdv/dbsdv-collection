@@ -269,10 +269,13 @@ function normalize(text) {
 }
 
 const promoCategories = [
-  { keyword: "アドバンスパック", category: "アドバンスパック" },
+  {
+    keyword: "アドバンスパック バトルオブサイヤン",
+    category: "バトルオブサイヤン",
+  },
   { keyword: "アドバンスパック2", category: "アドバンスパック2" },
   { keyword: "40th Anniversary", category: "アドバンスパック40周年" },
-  { keyword: "アドバンスパック", category: "バトルオブサイヤン" },
+  { keyword: "アドバンスパック", category: "アドバンスパック" },
 
   { keyword: "プロモーションパック", category: "プロモーションパック" },
 
