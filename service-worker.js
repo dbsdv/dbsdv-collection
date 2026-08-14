@@ -1,4 +1,4 @@
-const CACHE_NAME = "dbsdv-build-21";
+const CACHE_NAME = "dbsdv-build-22";
 
 const STATIC_FILES = ["./", "./index.html", "./manifest.json"];
 
@@ -61,6 +61,13 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
+  // version.json は毎回ネットから取得
+  if (url.pathname.endsWith("version.json")) {
+    event.respondWith(fetch(event.request));
+
+    return;
+  }
+
   // JS・CSS・画像はキャッシュ優先＋裏で更新
   event.respondWith(
     caches.match(event.request).then((cached) => {
@@ -79,7 +86,7 @@ self.addEventListener("fetch", (event) => {
       return cached || networkFetch;
     }),
   );
-});
+};);
 
 // アプリ側から「今すぐ新しい Service Worker を有効化して」と言われたら実行
 self.addEventListener("message", (event) => {
