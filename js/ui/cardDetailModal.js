@@ -109,7 +109,7 @@ function showCardDetail(card, list = cards) {
 
   document.getElementById("modalNumberMobile").textContent = card.id || "-";
 
-  document.getElementById("modalOwnedCount").textContent = card.owned ?? 0;
+  document.getElementById("modalOwnedCount").textContent = card.count ?? 0;
 
   modalRarity.textContent = `${card.parallel ? "★" : ""}${card.rarity || "-"}`;
 
@@ -318,14 +318,32 @@ showBackBtn.addEventListener("click", () => {
 countPlus.addEventListener("click", () => {
   if (!currentCard) return;
 
-  currentCard.owned++;
+  currentCard.count = (currentCard.count ?? 0) + 1;
+  currentCard.owned = currentCard.count > 0;
 
   modalOwnedCount.textContent = currentCard.count;
 
-  if (currentCard.owned) {
+  if (currentCard.count > 0) {
     modalWanted.checked = false;
     currentCard.wanted = false;
   }
+
+  saveCardData();
+
+  renderCards();
+  renderCollection();
+});
+
+countMinus.addEventListener("click", () => {
+  if (!currentCard) return;
+
+  if ((currentCard.count ?? 0) <= 0) return;
+
+  currentCard.count--;
+
+  currentCard.owned = currentCard.count > 0;
+
+  modalOwnedCount.textContent = currentCard.count;
 
   saveCardData();
 
