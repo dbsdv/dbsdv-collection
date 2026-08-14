@@ -1,4 +1,4 @@
-const CACHE_NAME = "dbsdv-build-15";
+const CACHE_NAME = "dbsdv-build-16";
 
 const STATIC_FILES = ["./", "./index.html", "./manifest.json"];
 

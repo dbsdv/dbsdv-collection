@@ -10,7 +10,12 @@ function backupData() {
 
     // DBSDV関連だけ保存
     Object.keys(localStorage).forEach((key) => {
-      if (key === "cardData" || key === "decks" || key === "unopenedPacks") {
+      if (
+        key === "cardData" ||
+        key === "decks" ||
+        key === "unopenedPacks" ||
+        key === "avatarSettings"
+      ) {
         backup.data[key] = JSON.parse(localStorage.getItem(key));
       }
     });
@@ -46,7 +51,7 @@ function createAutoBackup() {
     data: {},
   };
 
-  ["cardData", "decks", "unopenedPacks"].forEach((key) => {
+  ["cardData", "decks", "unopenedPacks", "avatarSettings"].forEach((key) => {
     const value = localStorage.getItem(key);
 
     if (value) {

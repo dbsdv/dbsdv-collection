@@ -41,3 +41,27 @@ function loadDecks() {
 
   decks = JSON.parse(savedDecks);
 }
+
+function saveAvatarSettings() {
+  const avatarSettings = {
+    hp: Number(document.getElementById("avatarHp").value || 0),
+    power: Number(document.getElementById("avatarPower").value || 0),
+    guard: Number(document.getElementById("avatarGuard").value || 0),
+    initialKi: Number(document.getElementById("avatarInitialKi").value || 0),
+  };
+
+  localStorage.setItem("avatarSettings", JSON.stringify(avatarSettings));
+}
+
+function loadAvatarSettings() {
+  const savedSettings = localStorage.getItem("avatarSettings");
+
+  if (!savedSettings) return;
+
+  const settings = JSON.parse(savedSettings);
+
+  document.getElementById("avatarHp").value = settings.hp || 0;
+  document.getElementById("avatarPower").value = settings.power || 0;
+  document.getElementById("avatarGuard").value = settings.guard || 0;
+  document.getElementById("avatarInitialKi").value = settings.initialKi || 0;
+}

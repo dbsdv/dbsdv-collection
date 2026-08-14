@@ -1,9 +1,10 @@
 let decks = [];
 
-let editingDeck = {
+editingDeck = {
   id: null,
   name: "",
   cards: Array(7).fill(null),
+  avatarType: "",
 };
 
 let isDeckEditing = false;
@@ -80,14 +81,33 @@ function renderDecks() {
       })
       .join("");
 
+    const avatarType = deck.avatarType || "";
+
+    let avatarClass = "";
+
+    if (avatarType === "R") {
+      avatarClass = "avatar-r";
+    } else if (avatarType === "B") {
+      avatarClass = "avatar-b";
+    } else if (avatarType === "I") {
+      avatarClass = "avatar-i";
+    }
+
+    const avatarSlot = `
+  <div class="deck-slot ${avatarClass}">
+    ${avatarType}
+  </div>
+`;
+
     deckList.innerHTML += `
             <div class="deck-card">
 
                 <h3>${deck.name}</h3>
 
                 <div class="deck-slots">
-                    ${slots}
-                </div>
+  ${slots}
+  ${avatarSlot}
+</div>
 
                 <div class="deck-count">
                     ${count} / 7枚
@@ -155,26 +175,59 @@ function renderEditorSlots() {
   editingDeck.cards.forEach((card, index) => {
     if (card) {
       editorSlots.innerHTML += `
-            <div class="editor-slot" data-index="${index}">
+        <div class="editor-slot" data-index="${index}">
 
-    <button class="remove-card-btn" data-index="${index}">
-        ✕
-    </button>
+          <button class="remove-card-btn" data-index="${index}">
+            ✕
+          </button>
 
-    <img
-    src="images/front/${card.id}.webp"
-        class="editor-card-image"
-        style="width:100%;border-radius:6px;">
+          <img
+            src="images/front/${card.id}.webp"
+            class="editor-card-image"
+            style="width:100%;border-radius:6px;">
 
-</div>
-
-        `;
+        </div>
+      `;
     } else {
       editorSlots.innerHTML += `
-            <div class="editor-slot" data-index="${index}"></div>
-        `;
+        <div class="editor-slot" data-index="${index}"></div>
+      `;
     }
   });
+
+  const avatarColor =
+    editingDeck.avatarType === "R"
+      ? "orange"
+      : editingDeck.avatarType === "B"
+        ? "green"
+        : editingDeck.avatarType === "I"
+          ? "blue"
+          : "";
+
+  editorSlots.innerHTML += `
+  <div
+    class="editor-slot avatar-slot"
+    id="avatarSlot"
+    style="color:${avatarColor};"
+  >
+    ${editingDeck.avatarType || ""}
+  </div>
+`;
+
+  const avatarSlot = document.getElementById("avatarSlot");
+
+  if (avatarSlot) {
+    avatarSlot.onclick = () => {
+      const types = ["R", "B", "I"];
+
+      const currentIndex = types.indexOf(editingDeck.avatarType);
+
+      editingDeck.avatarType = types[(currentIndex + 1) % types.length];
+
+      renderEditorSlots();
+      updateDeckStats();
+    };
+  }
 
   document.querySelectorAll(".editor-card-image").forEach((img, index) => {
     img.addEventListener("click", (e) => {
@@ -262,20 +315,59 @@ saveDeckBtn.addEventListener("click", () => {
 function updateDeckStats() {
   let hp = 0;
   let power = 0;
+  let powerAwakened = 0;
   let guard = 0;
+  let battlePower = 0;
+
+  const avatarHp = Number(document.getElementById("avatarHp")?.value || 0);
+
+  const avatarPower = Number(
+    document.getElementById("avatarPower")?.value || 0,
+  );
+
+  const avatarGuard = Number(
+    document.getElementById("avatarGuard")?.value || 0,
+  );
+
+  const avatarInitialKi = Number(
+    document.getElementById("avatarInitialKi")?.value || 0,
+  );
 
   editingDeck.cards.forEach((card) => {
     if (!card) return;
 
     hp += Number(card.hp || 0);
     power += Number(card.power || 0);
+
+    powerAwakened += Number(card.powerAwakened || card.power || 0);
+
     guard += Number(card.guard || 0);
+
+    const ki = Number(card.initialKi || 0);
+
+    if (card.type === "B") {
+      battlePower += ki * 3750;
+    } else {
+      battlePower += ki * 2500;
+    }
   });
+
+  hp += avatarHp;
+  power += avatarPower;
+  powerAwakened += avatarPower;
+  guard += avatarGuard;
+
+  if (editingDeck.avatarType === "B") {
+    battlePower += avatarInitialKi * 3750;
+  } else if (editingDeck.avatarType) {
+    battlePower += avatarInitialKi * 2500;
+  }
 
   document.getElementById("deckHp").textContent = hp;
   document.getElementById("deckPower").textContent = power;
+  document.getElementById("deckPowerAwakened").textContent = powerAwakened;
   document.getElementById("deckGuard").textContent = guard;
-  // document.getElementById("deckTotal").textContent = hp + power + guard;
+  document.getElementById("deckBattlePower").textContent = battlePower;
 
   const count = editingDeck.cards.filter((card) => card !== null).length;
 
@@ -321,7 +413,13 @@ document.getElementById("deckSeriesFilter").addEventListener("change", () => {
   renderDeckCards();
 });
 
-document.getElementById("deckSearch").addEventListener("input", () => {
+document.getElementById("deckSearch").addEventListener("input", (e) => {
+  const seriesFilter = document.getElementById("deckSeriesFilter");
+
+  if (e.target.value.trim() !== "") {
+    seriesFilter.value = "";
+  }
+
   renderDeckCards();
 });
 

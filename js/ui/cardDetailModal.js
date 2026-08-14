@@ -9,16 +9,55 @@ const modalName = document.getElementById("modalName");
 const modalNumber = document.getElementById("modalNumber");
 const modalRarity = document.getElementById("modalRarity");
 
+const modalType = document.getElementById("modalType");
 const modalAttackType = document.getElementById("modalAttackType");
+
 const modalHp = document.getElementById("modalHp");
 const modalPower = document.getElementById("modalPower");
+
+const modalPowerAwakened = document.getElementById("modalPowerAwakened");
+
+const modalPowerAwakenedRow = document.getElementById("modalPowerAwakenedRow");
+
 const modalGuard = document.getElementById("modalGuard");
 const modalInitialKi = document.getElementById("modalInitialKi");
 const modalEnergy = document.getElementById("modalEnergy");
 
-const modalActionSkill = document.getElementById("modalActionSkill");
 const modalSpecialMove = document.getElementById("modalSpecialMove");
-const modalSkill = document.getElementById("modalSkill");
+
+const modalSkillSection = document.getElementById("modalSkillSection");
+
+const modalSkillName = document.getElementById("modalSkillName");
+
+const modalSkillEffect = document.getElementById("modalSkillEffect");
+
+const modalActionSection = document.getElementById("modalActionSection");
+
+const modalActionName = document.getElementById("modalActionName");
+
+const modalActionCategory = document.getElementById("modalActionCategory");
+
+const modalActionEffect = document.getElementById("modalActionEffect");
+
+const modalUnitSection = document.getElementById("modalUnitSection");
+
+const modalUnitName = document.getElementById("modalUnitName");
+
+const modalUnitCharacters = document.getElementById("modalUnitCharacters");
+
+const modalUnitEffect = document.getElementById("modalUnitEffect");
+
+const modalBuppaSection = document.getElementById("modalBuppaSection");
+
+const modalBuppaName = document.getElementById("modalBuppaName");
+
+const modalBuppaEffect = document.getElementById("modalBuppaEffect");
+
+const modalSpecialRuleSection = document.getElementById(
+  "modalSpecialRuleSection",
+);
+
+const modalSpecialRule = document.getElementById("modalSpecialRule");
 
 const modalWanted = document.getElementById("modalWanted");
 const modalUnopened = document.getElementById("modalUnopened");
@@ -70,21 +109,21 @@ function showCardDetail(card, list = cards) {
 
   document.getElementById("modalNumberMobile").textContent = card.id || "-";
 
-  document.getElementById("modalOwnedCount").textContent = card.count ?? 0;
+  document.getElementById("modalOwnedCount").textContent = card.owned ?? 0;
 
   modalRarity.textContent = `${card.parallel ? "★" : ""}${card.rarity || "-"}`;
 
-  const attackTypes = {
+  const typeData = {
     I: {
-      name: "インパクト：打撃",
+      name: "インパクト",
       color: "#2196f3",
     },
     B: {
-      name: "ブースト：気弾",
+      name: "ブースト",
       color: "#43a047",
     },
     R: {
-      name: "ラッシュ：打撃",
+      name: "ラッシュ",
       color: "#fb8c00",
     },
     L: {
@@ -93,15 +132,17 @@ function showCardDetail(card, list = cards) {
     },
   };
 
-  const attack = attackTypes[card.type];
+  const type = typeData[card.type];
 
-  if (attack) {
-    modalAttackType.textContent = attack.name;
-    modalAttackType.style.color = attack.color;
+  if (type) {
+    modalType.textContent = type.name;
+    modalType.style.color = type.color;
   } else {
-    modalAttackType.textContent = "-";
-    modalAttackType.style.color = "";
+    modalType.textContent = "-";
+    modalType.style.color = "";
   }
+
+  modalAttackType.textContent = card.attackType || "-";
 
   modalHp.textContent = card.hp || "-";
   modalPower.textContent = card.power || "-";
@@ -109,15 +150,74 @@ function showCardDetail(card, list = cards) {
   modalInitialKi.textContent = card.initialKi || "-";
   modalEnergy.textContent = card.energy || "-";
 
-  modalActionSkill.textContent = card.actionSkill || "-";
+  if (card.powerAwakened !== null) {
+    modalPowerAwakenedRow.style.display = "";
+
+    modalPowerAwakened.textContent = card.powerAwakened;
+  } else {
+    modalPowerAwakenedRow.style.display = "none";
+  }
+
   modalSpecialMove.textContent = card.specialMove || "-";
-  modalSkill.textContent = card.skill || "-";
+
+  // スキル
+  if (card.skillName || card.skillEffect) {
+    modalSkillSection.style.display = "";
+
+    modalSkillName.textContent = card.skillName || "";
+    modalSkillEffect.textContent = card.skillEffect || "";
+  } else {
+    modalSkillSection.style.display = "none";
+  }
+
+  // アクション
+  if (card.actionName || card.actionCategory || card.actionEffect) {
+    modalActionSection.style.display = "";
+
+    modalActionName.textContent = card.actionName || "";
+    modalActionCategory.textContent = card.actionCategory || "";
+    modalActionEffect.textContent = card.actionEffect || "";
+  } else {
+    modalActionSection.style.display = "none";
+  }
+
+  // ユニット
+  if (card.unitName || card.unitCharacters || card.unitEffect) {
+    modalUnitSection.style.display = "";
+
+    modalUnitName.textContent = card.unitName || "";
+    modalUnitCharacters.textContent = card.unitCharacters || "";
+    modalUnitEffect.textContent = card.unitEffect || "";
+  } else {
+    modalUnitSection.style.display = "none";
+  }
+
+  // ブッパ
+  if (card.buppaName || card.buppaEffect) {
+    modalBuppaSection.style.display = "";
+
+    modalBuppaName.textContent = card.buppaName || "";
+    modalBuppaEffect.textContent = card.buppaEffect || "";
+  } else {
+    modalBuppaSection.style.display = "none";
+  }
+
+  // 特殊ルール
+  if (card.specialRule) {
+    modalSpecialRuleSection.style.display = "";
+
+    modalSpecialRule.textContent = card.specialRule;
+  } else {
+    modalSpecialRuleSection.style.display = "none";
+  }
+
   modalWanted.checked = card.wanted ?? false;
   modalUnopened.checked = card.unopened ?? false;
 
-  if (card.rarity === "CP" || card.rarity === "PR") {
+  if (card.acquisition) {
     modalAcquisitionSection.style.display = "";
-    modalAcquisition.textContent = card.acquisition || "-";
+
+    modalAcquisition.textContent = card.acquisition;
   } else {
     modalAcquisitionSection.style.display = "none";
   }
@@ -143,7 +243,7 @@ function showCardDetail(card, list = cards) {
 
   document.getElementById("cardCount").textContent =
     `${currentIndex + 1} / ${window.currentVisibleCards.length}枚`;
-}
+} //
 
 /* -------------------------
    モーダルを閉じる
@@ -218,9 +318,7 @@ showBackBtn.addEventListener("click", () => {
 countPlus.addEventListener("click", () => {
   if (!currentCard) return;
 
-  currentCard.count++;
-
-  currentCard.owned = currentCard.count > 0;
+  currentCard.owned++;
 
   modalOwnedCount.textContent = currentCard.count;
 
@@ -238,9 +336,9 @@ countPlus.addEventListener("click", () => {
 countMinus.addEventListener("click", () => {
   if (!currentCard) return;
 
-  if (currentCard.count <= 0) return;
+  if (currentCard.owned <= 0) return;
 
-  currentCard.count--;
+  currentCard.owned--;
 
   currentCard.owned = currentCard.count > 0;
 

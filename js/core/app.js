@@ -13,6 +13,15 @@ ownedOnly.addEventListener("change", filterCards);
   await loadCards();
 
   loadDecks();
+  loadAvatarSettings();
+
+  ["avatarHp", "avatarPower", "avatarGuard", "avatarInitialKi"].forEach(
+    (id) => {
+      document.getElementById(id).addEventListener("input", () => {
+        saveAvatarSettings();
+      });
+    },
+  );
 
   renderDecks();
 

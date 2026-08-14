@@ -138,20 +138,14 @@
           <div id="editorSlots"></div>
 
           <div class="deck-stats">
-            <h3>📊 デッキステータス</h3>
+  <h3>📊 デッキステータス</h3>
 
-            <div>❤️ HP：<span id="deckHp">0</span></div>
-
-            <div>⚔️ Power：<span id="deckPower">0</span></div>
-
-            <div>🛡️ Guard：<span id="deckGuard">0</span></div>
-
-            <!--
-<div>
-  ⭐ 戦闘力：
-  <span id="deckTotal"></span>
+  <div>❤️ HP：<span id="deckHp">0</span></div>
+  <div>⚔️ Power（通常）：<span id="deckPower">0</span></div>
+  <div>🔥 Power（覚醒）：<span id="deckPowerAwakened">0</span></div>
+  <div>🛡️ Guard：<span id="deckGuard">0</span></div>
+  <div>⚡ 戦闘力：<span id="deckBattlePower">0</span></div>
 </div>
--->
           </div>
 
           <div class="deck-buttons">
@@ -307,6 +301,30 @@
         </div>
 
         <div class="setting-card">
+  <h3>👤 アバター設定</h3>
+
+  <div class="setting-info">
+    <strong>❤️ HP</strong>
+    <input id="avatarHp" type="number" min="0" value="0" />
+  </div>
+
+  <div class="setting-info">
+    <strong>⚔️ Power</strong>
+    <input id="avatarPower" type="number" min="0" value="0" />
+  </div>
+
+  <div class="setting-info">
+    <strong>🛡️ Guard</strong>
+    <input id="avatarGuard" type="number" min="0" value="0" />
+  </div>
+
+  <div class="setting-info">
+    <strong>⚡ 初期気力</strong>
+    <input id="avatarInitialKi" type="number" min="0" value="0" />
+  </div>
+</div>
+
+        <div class="setting-card">
           <h3>🃏 カードデータ情報</h3>
 
           <div class="setting-info">
@@ -423,75 +441,117 @@
   </div>
 </div>
 
-            <div class="stats">
-              <div>
-                <strong>攻撃方法</strong>
-                <span id="modalAttackType">-</span>
-              </div>
+<div class="stats">
+  <div>
+    <strong>タイプ</strong>
+    <span id="modalType">-</span>
+  </div>
 
-              <div>
-                <strong>HP</strong>
-                <span id="modalHp">-</span>
-              </div>
+  <div>
+    <strong>攻撃方法</strong>
+    <span id="modalAttackType">-</span>
+  </div>
 
-              <div>
-                <strong>パワー</strong>
-                <span id="modalPower">-</span>
-              </div>
+  <div>
+    <strong>HP</strong>
+    <span id="modalHp">-</span>
+  </div>
 
-              <div>
-                <strong>ガード</strong>
-                <span id="modalGuard">-</span>
-              </div>
+  <div>
+    <strong>パワー</strong>
+    <span id="modalPower">-</span>
+  </div>
 
-              <div>
-                <strong>初期気力</strong>
-                <span id="modalInitialKi">-</span>
-              </div>
+  <div id="modalPowerAwakenedRow">
+    <strong>覚醒パワー</strong>
+    <span id="modalPowerAwakened">-</span>
+  </div>
 
-              <div>
-                <strong>必殺技必要エナジー</strong>
-                <span id="modalEnergy">-</span>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div>
+    <strong>ガード</strong>
+    <span id="modalGuard">-</span>
+  </div>
 
-        <div class="modal-section">
-          <h3>アクションスキル</h3>
+  <div>
+    <strong>初期気力</strong>
+    <span id="modalInitialKi">-</span>
+  </div>
 
-          <p id="modalActionSkill"></p>
-        </div>
+  <div>
+    <strong>必殺技必要エナジー</strong>
+    <span id="modalEnergy">-</span>
+  </div>
+</div>
 
-        <div class="modal-section">
-          <h3>必殺技</h3>
+</div>
+</div>
 
-          <p id="modalSpecialMove"></p>
-        </div>
+<div class="modal-section">
+  <h3>必殺技</h3>
 
-        <div class="modal-section">
-          <h3>スキル</h3>
+  <p id="modalSpecialMove"></p>
+</div>
 
-          <p id="modalSkill"></p>
-        </div>
+<div class="modal-section" id="modalSkillSection">
+  <h3>スキル</h3>
 
-        <div class="modal-section" id="modalAcquisitionSection">
-          <h3>入手方法</h3>
+  <h4 id="modalSkillName"></h4>
 
-          <p id="modalAcquisition"></p>
-        </div>
+  <p id="modalSkillEffect"></p>
+</div>
 
-        <div class="modal-section">
-          <h3>メモ</h3>
+<div class="modal-section" id="modalActionSection">
+  <h3>アクション</h3>
 
-          <textarea
-            id="modalMemo"
-            rows="4"
-            placeholder="自由にメモできます"
-          ></textarea>
-        </div>
-      </div>
-    </div>
+  <h4 id="modalActionName"></h4>
+
+  <p id="modalActionCategory"></p>
+
+  <p id="modalActionEffect"></p>
+</div>
+
+<div class="modal-section" id="modalUnitSection">
+  <h3>ユニット</h3>
+
+  <h4 id="modalUnitName"></h4>
+
+  <p id="modalUnitCharacters"></p>
+
+  <p id="modalUnitEffect"></p>
+</div>
+
+<div class="modal-section" id="modalBuppaSection">
+  <h3>ブッパ</h3>
+
+  <h4 id="modalBuppaName"></h4>
+
+  <p id="modalBuppaEffect"></p>
+</div>
+
+<div class="modal-section" id="modalSpecialRuleSection">
+  <h3>特殊ルール</h3>
+
+  <p id="modalSpecialRule"></p>
+</div>
+
+<div class="modal-section" id="modalAcquisitionSection">
+  <h3>入手方法</h3>
+
+  <p id="modalAcquisition"></p>
+</div>
+
+<div class="modal-section">
+  <h3>メモ</h3>
+
+  <textarea
+    id="modalMemo"
+    rows="4"
+    placeholder="自由にメモできます"
+  ></textarea>
+</div>
+
+</div>
+</div>
 
     <nav class="bottom-nav">
       <button id="tabCards" class="active">

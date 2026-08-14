@@ -203,7 +203,11 @@ async function loadCards() {
     renderCards();
   });
 
-  document.getElementById("search").addEventListener("input", () => {
+  document.getElementById("search").addEventListener("input", (e) => {
+    if (e.target.value.trim() !== "") {
+      document.getElementById("seriesFilter").value = "";
+    }
+
     renderCards();
   });
 
@@ -254,6 +258,13 @@ async function loadCards() {
     localStorage.removeItem("unopenedPacks");
     unopenedPacks = [];
     renderUnopenedPacks();
+
+    localStorage.removeItem("avatarSettings");
+
+    document.getElementById("avatarHp").value = 0;
+    document.getElementById("avatarPower").value = 0;
+    document.getElementById("avatarGuard").value = 0;
+    document.getElementById("avatarInitialKi").value = 0;
 
     saveCardData();
 
@@ -309,8 +320,8 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
   let visibleCards = [];
 
   const seriesFilter =
-    mode === "select" && deckSeries
-      ? deckSeries
+    mode === "select"
+      ? document.getElementById("deckSeriesFilter").value
       : document.getElementById("seriesFilter").value;
 
   const rarityFilter =
@@ -423,10 +434,33 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
     }
 
     const searchText = normalize(
-      `${card.id}
-     ${card.displayId ?? ""}
-     ${card.name}`,
+      `
+  ${card.id}
+  ${card.displayId ?? ""}
+  ${card.name ?? ""}
+  ${card.specialMove ?? ""}
+  ${card.skillName ?? ""}
+  ${card.skillEffect ?? ""}
+  ${card.actionName ?? ""}
+  ${card.actionSkill ?? ""}
+  ${card.actionEffect ?? ""}
+  ${card.unitName ?? ""}
+  ${card.unitCharacters ?? ""}
+  ${card.unitEffect ?? ""}
+  ${card.buppaName ?? ""}
+  ${card.buppaEffect ?? ""}
+  ${card.specialRule ?? ""}
+  `.replace(/\s+/g, " "),
     );
+
+    console.log(card.name, searchText);
+
+    if (
+      keywords.length &&
+      !keywords.every((word) => searchText.includes(word))
+    ) {
+      return;
+    }
 
     if (
       keywords.length &&
@@ -556,6 +590,8 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
 
 function renderDeckCards() {
   const series = document.getElementById("deckSeriesFilter").value;
+
+  console.log("series=", JSON.stringify(series));
 
   renderCards("editorCardList", "select", series);
 }
