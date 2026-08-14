@@ -68,7 +68,7 @@ function renderDecks() {
             <div class="deck-slot">
 
                 <img
-                    src="images/front/${card.id}.webp"
+                    src="images/thumb/${card.id}.webp"
                     class="deck-slot-image">
 
             </div>
@@ -182,7 +182,7 @@ function renderEditorSlots() {
           </button>
 
           <img
-            src="images/front/${card.id}.webp"
+            src="images/thumb/${card.id}.webp"
             class="editor-card-image"
             style="width:100%;border-radius:6px;">
 
