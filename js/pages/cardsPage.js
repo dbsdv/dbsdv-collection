@@ -13,6 +13,24 @@ async function loadCards() {
 
   cards = await response.json();
 
+  cards.forEach((card) => {
+    card.searchText = normalize(`
+    ${card.id}
+    ${card.displayId ?? ""}
+    ${card.name ?? ""}
+    ${card.skillName ?? ""}
+    ${card.skillEffect ?? ""}
+    ${card.actionName ?? ""}
+    ${card.actionEffect ?? ""}
+    ${card.unitName ?? ""}
+    ${card.unitCharacters ?? ""}
+    ${card.unitEffect ?? ""}
+    ${card.buppaName ?? ""}
+    ${card.buppaEffect ?? ""}
+    ${card.specialRule ?? ""}
+  `);
+  });
+
   window.cards = cards;
 
   const seriesFilter = document.getElementById("seriesFilter");
@@ -433,35 +451,6 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
       return;
     }
 
-    const searchText = normalize(
-      `
-  ${card.id}
-  ${card.displayId ?? ""}
-  ${card.name ?? ""}
-  ${card.specialMove ?? ""}
-  ${card.skillName ?? ""}
-  ${card.skillEffect ?? ""}
-  ${card.actionName ?? ""}
-  ${card.actionSkill ?? ""}
-  ${card.actionEffect ?? ""}
-  ${card.unitName ?? ""}
-  ${card.unitCharacters ?? ""}
-  ${card.unitEffect ?? ""}
-  ${card.buppaName ?? ""}
-  ${card.buppaEffect ?? ""}
-  ${card.specialRule ?? ""}
-  `.replace(/\s+/g, " "),
-    );
-
-    console.log(card.name, searchText);
-
-    if (
-      keywords.length &&
-      !keywords.every((word) => searchText.includes(word))
-    ) {
-      return;
-    }
-
     if (
       keywords.length &&
       !keywords.every((word) => searchText.includes(word))
@@ -513,7 +502,7 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
 
     <img
     loading="lazy"
-    src="images/front/${card.id}.webp"
+    src="images/thumb/${card.id}.webp"
     class="${mode === "detail" && card.owned ? "gray" : ""}"
     onerror="this.src='images/noimage.jpg'"
 >
