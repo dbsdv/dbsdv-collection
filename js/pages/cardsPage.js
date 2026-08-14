@@ -512,6 +512,7 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
             </div>
 
     <img
+    loading="lazy"
     src="images/front/${card.id}.webp"
     class="${mode === "detail" && card.owned ? "gray" : ""}"
     onerror="this.src='images/noimage.jpg'"
@@ -544,8 +545,8 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
         saveCardData();
 
         renderCards();
-        filterCards();
-
+        //filterCards();
+        //
         renderCollection();
 
         if (isDeckEditing) {
