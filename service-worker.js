@@ -34,12 +34,12 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(event.request.url);
 
-  // http/https 以外はキャッシュしない
+  // http/https以外はキャッシュしない
   if (url.protocol !== "http:" && url.protocol !== "https:") {
     return;
   }
 
-  // index.html は毎回ネット優先
+  // index.htmlは毎回ネット優先
   if (
     event.request.mode === "navigate" ||
     url.pathname.endsWith("index.html")
@@ -61,7 +61,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // version.json は毎回ネットから取得
+  // version.jsonは毎回ネットから取得
   if (url.pathname.endsWith("version.json")) {
     event.respondWith(fetch(event.request));
 
@@ -86,11 +86,11 @@ self.addEventListener("fetch", (event) => {
       return cached || networkFetch;
     }),
   );
-};);
+});
 
-// アプリ側から「今すぐ新しい Service Worker を有効化して」と言われたら実行
+// アプリ側から「今すぐ新しいService Workerを有効化して」と言われたら実行
 self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
+  if (event.data?.type === "SKIP_WAITING") {
     self.skipWaiting();
   }
 });
