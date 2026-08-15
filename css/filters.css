@@ -4,74 +4,88 @@
 
 /* レイアウト */
 
-.filters{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    margin-bottom:20px;
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
-.filter-row{
-
-    display:flex;
-    align-items:center;
-    gap:12px;
-
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 /* 入力 */
 
 .filters input[type="text"],
-.filters select{
-    flex:1;
-    min-width:220px;
-    padding:10px 12px;
-    font-size:16px;
-
+.filters select {
+  flex: 1;
+  min-width: 220px;
+  padding: 10px 12px;
+  font-size: 16px;
 }
-.filter-row input[type="text"]{
-    flex:1;
-
+.filter-row input[type="text"] {
+  flex: 1;
 }
 
-.filter-row select{
-    width:220px;
-
+.filter-row select {
+  width: 220px;
 }
 
 /* チェックボックス */
 
-.option-row{
-    justify-content:flex-start;
+.option-row {
+  justify-content: flex-start;
 }
 
-.option-row label{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:0 8px;
-    white-space:nowrap;
+.option-row label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  white-space: nowrap;
 }
 
 /* ボタン・表示 */
 
-.result-row{
-    display:flex;
-    justify-content:flex-end;
-    align-items:center;
-    margin-top:8px;
-    width:100%;
-
+.result-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 8px;
+  width: 100%;
 }
 
-#resetFilter{
-    grid-column:1 / 3;
-    width:100%;
-    height:40px;
-    padding:0 16px;
+#resetFilter {
+  grid-column: 1 / 3;
+  width: 100%;
+  height: 40px;
+  padding: 0 16px;
 }
 
-#resultCount{
-    font-weight:bold;
+#resultCount {
+  font-weight: bold;
+}
 
+.search-group {
+  width: 100%;
+}
+
+.search-options {
+  display: flex;
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.search-options label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.search-options input[type="checkbox"] {
+  margin: 0;
 }
