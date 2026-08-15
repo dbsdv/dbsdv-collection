@@ -49,15 +49,28 @@
     <main>
       <section id="cardsPage">
         <section class="filters">
+
           <div class="filter-row">
-            <div class="search-group">
-              <input
-                type="text"
-                id="search"
-                placeholder="カード名・カード番号で検索"
-              />
-            </div>
-          </div>
+  <div class="search-group">
+    <input
+      type="text"
+      id="search"
+      placeholder="カード名・カード番号で検索"
+    />
+
+    <div class="search-options">
+      <label>
+        <input type="checkbox" id="searchName" />
+        カード名
+      </label>
+
+      <label>
+        <input type="checkbox" id="searchUnit" />
+        ユニット相手
+      </label>
+    </div>
+  </div>
+</div>
 
           <div class="filter-row">
             <div class="select-group">
@@ -115,6 +128,7 @@
       </section>
 
       <section id="deckPage" hidden>
+
         <!-- 一覧画面 -->
         <div id="deckListPage">
           <h2>🃏 デッキ</h2>
@@ -399,7 +413,7 @@
 
               <button id="showBack">裏</button>
             </div>
-          </div>
+            </div>
 
           <!-- 右 -->
 
@@ -486,23 +500,29 @@
 </div>
 
 <div class="modal-section">
-  <h3>必殺技</h3>
+  <div class="section-title">
+    <h3>⚔️ 必殺技</h3>
 
-  <p id="modalSpecialMove"></p>
+    <h4 id="modalSpecialMove"></h4>
+  </div>
 </div>
 
 <div class="modal-section" id="modalSkillSection">
-  <h3>スキル</h3>
+  <div class="section-title">
+    <h3>✨ スキル</h3>
 
-  <h4 id="modalSkillName"></h4>
+    <h4 id="modalSkillName"></h4>
+  </div>
 
   <p id="modalSkillEffect"></p>
 </div>
 
 <div class="modal-section" id="modalActionSection">
-  <h3>アクション</h3>
+  <div class="section-title">
+    <h3>⚡ アクション</h3>
 
-  <h4 id="modalActionName"></h4>
+    <h4 id="modalActionName"></h4>
+  </div>
 
   <p id="modalActionCategory"></p>
 
@@ -510,9 +530,11 @@
 </div>
 
 <div class="modal-section" id="modalUnitSection">
-  <h3>ユニット</h3>
+  <div class="section-title">
+    <h3>👥 ユニット</h3>
 
-  <h4 id="modalUnitName"></h4>
+    <h4 id="modalUnitName"></h4>
+  </div>
 
   <p id="modalUnitCharacters"></p>
 
@@ -520,27 +542,33 @@
 </div>
 
 <div class="modal-section" id="modalBuppaSection">
-  <h3>ブッパ</h3>
+  <div class="section-title">
+    <h3>💥 BUPPA</h3>
 
-  <h4 id="modalBuppaName"></h4>
+    <h4 id="modalBuppaName"></h4>
+  </div>
 
   <p id="modalBuppaEffect"></p>
 </div>
 
 <div class="modal-section" id="modalSpecialRuleSection">
-  <h3>特殊ルール</h3>
+  <div class="section-title">
+    <h3>📜 特殊ルール</h3>
 
-  <p id="modalSpecialRule"></p>
+    <h4 id="modalSpecialRule"></h4>
+  </div>
 </div>
 
 <div class="modal-section" id="modalAcquisitionSection">
-  <h3>入手方法</h3>
+  <div class="section-title">
+    <h3>🎁 入手方法</h3>
 
-  <p id="modalAcquisition"></p>
+    <h4 id="modalAcquisition"></h4>
+  </div>
 </div>
 
 <div class="modal-section">
-  <h3>メモ</h3>
+  <h3>📝 メモ</h3>
 
   <textarea
     id="modalMemo"

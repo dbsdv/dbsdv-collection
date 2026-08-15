@@ -29,6 +29,16 @@ async function loadCards() {
     ${card.buppaEffect ?? ""}
     ${card.specialRule ?? ""}
   `);
+
+    card.nameSearchText = normalize(`
+    ${card.id}
+    ${card.displayId ?? ""}
+    ${card.name ?? ""}
+  `);
+
+    card.unitSearchText = normalize(`
+    ${card.unitCharacters ?? ""}
+  `);
   });
 
   window.cards = cards;
@@ -229,6 +239,14 @@ async function loadCards() {
     renderCards();
   });
 
+  document.getElementById("searchName").addEventListener("change", () => {
+    renderCards();
+  });
+
+  document.getElementById("searchUnit").addEventListener("change", () => {
+    renderCards();
+  });
+
   document.getElementById("resetFilter").addEventListener("click", () => {
     document.getElementById("seriesFilter").value = "";
     document.getElementById("rarityFilter").value = "";
@@ -377,6 +395,10 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
 
   const keywords = normalize(searchInput.value).split(/\s+/).filter(Boolean);
 
+  const searchName = document.getElementById("searchName")?.checked ?? true;
+
+  const searchUnit = document.getElementById("searchUnit")?.checked ?? false;
+
   if (
     mode !== "select" &&
     !seriesFilter &&
@@ -451,11 +473,24 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
       return;
     }
 
-    if (
-      keywords.length &&
-      !keywords.every((word) => searchText.includes(word))
-    ) {
-      return;
+    if (keywords.length) {
+      let searchText = "";
+
+      if (!searchName && !searchUnit) {
+        searchText = card.searchText ?? "";
+      } else {
+        if (searchName) {
+          searchText += ` ${card.nameSearchText ?? ""}`;
+        }
+
+        if (searchUnit) {
+          searchText += ` ${card.unitSearchText ?? ""}`;
+        }
+      }
+
+      if (!keywords.every((word) => searchText.includes(word))) {
+        return;
+      }
     }
 
     const cardDiv = document.createElement("div");

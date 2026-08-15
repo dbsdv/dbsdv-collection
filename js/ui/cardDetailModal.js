@@ -186,7 +186,22 @@ function showCardDetail(card, list = cards) {
     modalUnitSection.style.display = "";
 
     modalUnitName.textContent = card.unitName || "";
-    modalUnitCharacters.textContent = card.unitCharacters || "";
+
+    modalUnitName.textContent = card.unitName || "";
+
+    if (card.unitCharacters) {
+      modalUnitCharacters.innerHTML = card.unitCharacters
+        .split("/")
+        .map((character) => {
+          return `<span class="unit-chip">${character.trim()}</span>`;
+        })
+        .join("");
+    } else {
+      modalUnitCharacters.innerHTML = "";
+    }
+
+    modalUnitEffect.textContent = card.unitEffect || "";
+
     modalUnitEffect.textContent = card.unitEffect || "";
   } else {
     modalUnitSection.style.display = "none";

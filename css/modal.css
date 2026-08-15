@@ -234,19 +234,54 @@
 ========================================== */
 
 .modal-section {
-  margin-top: 35px;
+  margin-top: 30px;
 }
 
-.modal-section h3 {
-  margin: 0 0 10px;
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
   padding-bottom: 8px;
   border-bottom: 2px solid #eee;
+}
+
+.section-title h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.section-title h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .modal-section p {
   margin: 0;
   line-height: 1.8;
   white-space: pre-wrap;
+}
+
+#modalUnitCharacters {
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+#modalUnitCharacters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.unit-chip {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #eee;
+  font-weight: bold;
 }
 
 /* ==========================

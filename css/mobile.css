@@ -4,128 +4,139 @@
 
 /* 共通 */
 
-@media (max-width:700px){
+@media (max-width: 700px) {
+  body {
+    margin: 0;
+    padding: 8px 8px 70px;
+  }
 
-    body{
-    margin:0;
-    padding:8px 8px 70px;
-}
+  h1 {
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
 
-    h1{
-        font-size:20px;
-        margin-bottom:18px;
-    }
-
-/* ==========================
+  /* ==========================
    フィルター
 ========================== */
 
-/* 検索エリア */
+  /* 検索エリア */
 
-.filter-row{
-        flex-direction:column;
-}
+  .filter-row {
+    flex-direction: column;
+  }
 
-.search-group{
-        flex:none;
-        width:100%;
-}
+  .search-group {
+    flex: none;
+    width: 100%;
+  }
 
-.search-group input{
-        width:100%;
-}
+  .search-group input {
+    width: 100%;
+  }
 
-.select-group {
+  .select-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     width: 100%;
-}
+  }
 
-.select-group select {
+  .select-group select {
     width: 100%;
     min-width: 0;
     font-size: 15px;
-}
+  }
 
-#resetFilter {
+  #resetFilter {
     grid-column: 1 / -1;
-}
+  }
 
-/* チェックボックス */
+  /* チェックボックス */
 
-.option-row{
-        display:flex;
-        flex-direction:column;
-        align-items:flex-start;
-        gap:6px;
-}
+  .option-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
 
-#resultCount{
-        align-self:flex-end;
-        margin-left:0;
-        font-weight:bold;
-}
+  #resultCount {
+    align-self: flex-end;
+    margin-left: 0;
+    font-weight: bold;
+  }
 
-.result-row{
-    width:100%;
-    display:flex;
-    justify-content:flex-end;
-}
+  .result-row {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
 
-.option-row input[type="checkbox"]{
-    width:18px;
-    height:18px;
-    flex-shrink:0;
-}
+  .option-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
 
-/* ==========================
+  .search-options {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .search-options label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+  }
+
+  /* ==========================
    カード
 ========================== */
 
-#cards{
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:6px;
-}
+  #cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
 
-.card{
-    padding:6px;
-}
+  .card {
+    padding: 6px;
+  }
 
-.card-header{
-    margin-bottom:4px;
-}
+  .card-header {
+    margin-bottom: 4px;
+  }
 
-.card-left{
-    display:flex;
-    align-items:center;
-    gap:4px;
-    flex:1;
-    min-width:0;
-}
+  .card-left {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+  }
 
-.card-id{
-    font-size:10px;
-    letter-spacing:-0.3px;
-    flex:1;
-}
+  .card-id {
+    font-size: 10px;
+    letter-spacing: -0.3px;
+    flex: 1;
+  }
 
-.rarity-badge{
-    font-size:9px;
-    padding:1px 4px;
-}
+  .rarity-badge {
+    font-size: 9px;
+    padding: 1px 4px;
+  }
 
-.card-name{
-    font-size:12px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    margin-top:6px;
-}
+  .card-name {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 6px;
+  }
 
-.owned-btn{
-    font-size:14px;
-}
-
+  .owned-btn {
+    font-size: 14px;
+  }
 }
