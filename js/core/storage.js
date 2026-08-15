@@ -6,6 +6,7 @@ function saveCardData() {
       count: card.count ?? (card.owned ? 1 : 0),
       unopened: card.unopened ?? false,
       wanted: card.wanted ?? false,
+      mistake: card.mistake ?? false,
       memo: card.memo ?? "",
     };
   });
@@ -26,6 +27,7 @@ function loadCardData() {
     card.owned = card.count > 0;
     card.unopened = cardData[card.id].unopened ?? false;
     card.wanted = cardData[card.id].wanted ?? false;
+    card.mistake = cardData[card.id].mistake ?? false;
     card.memo = cardData[card.id].memo ?? "";
   });
 }

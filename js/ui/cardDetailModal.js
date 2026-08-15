@@ -62,6 +62,8 @@ const modalSpecialRule = document.getElementById("modalSpecialRule");
 const modalWanted = document.getElementById("modalWanted");
 const modalUnopened = document.getElementById("modalUnopened");
 
+const modalMistake = document.getElementById("modalMistake");
+
 const modalAcquisition = document.getElementById("modalAcquisition");
 const modalAcquisitionSection = document.getElementById(
   "modalAcquisitionSection",
@@ -228,6 +230,7 @@ function showCardDetail(card, list = cards) {
 
   modalWanted.checked = card.wanted ?? false;
   modalUnopened.checked = card.unopened ?? false;
+  modalMistake.checked = card.mistake ?? false;
 
   if (card.acquisition) {
     modalAcquisitionSection.style.display = "";
@@ -416,7 +419,6 @@ nextCardBtn.addEventListener("click", () => {
     window.currentVisibleCards,
   );
 });
-
 modalWanted.addEventListener("change", () => {
   if (!currentCard) return;
 
@@ -427,6 +429,14 @@ modalWanted.addEventListener("change", () => {
   }
 
   currentCard.wanted = modalWanted.checked;
+
+  saveCardData();
+});
+
+modalMistake.addEventListener("change", () => {
+  if (!currentCard) return;
+
+  currentCard.mistake = modalMistake.checked;
 
   saveCardData();
 });

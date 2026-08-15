@@ -17,10 +17,11 @@
 
   .search-options {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 24px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
     margin-top: 10px;
+    width: 100%;
   }
 
   .search-options label {
@@ -91,19 +92,6 @@
     width: 18px;
     height: 18px;
     flex-shrink: 0;
-  }
-
-  .search-options {
-    display: flex;
-    gap: 16px;
-    margin-top: 8px;
-  }
-
-  .search-options label {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 14px;
   }
 
   /* ==========================

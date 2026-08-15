@@ -314,6 +314,18 @@
         </div>
 
         <div class="setting-card">
+  <h3>📝 修正</h3>
+
+  <button id="copyMistakeList" class="btn btn-primary">
+    📋 要修正カード一覧をコピー
+  </button>
+
+   <button id="clearMistakeList" class="btn btn-danger">
+    🗑️ 要修正を全解除
+  </button>
+</div>
+
+        <div class="setting-card">
   <h3>👤 アバター設定</h3>
 
   <div class="setting-info">
@@ -422,6 +434,11 @@
               <h2 id="modalName"></h2>
 
               <span id="modalRarity"></span>
+
+               <label class="mistake-label">
+    <input type="checkbox" id="modalMistake">
+    要修正
+  </label>
 
               <div class="card-header-info">
                 <span id="modalNumber"></span>
@@ -562,9 +579,9 @@
 <div class="modal-section" id="modalAcquisitionSection">
   <div class="section-title">
     <h3>🎁 入手方法</h3>
-
-    <h4 id="modalAcquisition"></h4>
   </div>
+
+  <p id="modalAcquisition"></p>
 </div>
 
 <div class="modal-section">

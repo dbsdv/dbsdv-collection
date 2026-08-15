@@ -311,6 +311,46 @@ async function loadCards() {
   });
 }
 
+document.getElementById("copyMistakeList").addEventListener("click", () => {
+  const mistakeCards = cards.filter((card) => card.mistake);
+
+  if (mistakeCards.length === 0) {
+    alert("修正対象のカードはありません");
+    return;
+  }
+
+  const mistakeList = mistakeCards.map((card) => card.id).join("\n");
+
+  const textarea = document.createElement("textarea");
+
+  textarea.value = mistakeList;
+  textarea.style.position = "fixed";
+  textarea.style.left = "-9999px";
+
+  document.body.appendChild(textarea);
+
+  textarea.select();
+  document.execCommand("copy");
+
+  document.body.removeChild(textarea);
+
+  alert("カード一覧をコピーしました");
+});
+
+document.getElementById("clearMistakeList").addEventListener("click", () => {
+  const ok = confirm("修正対象のチェックをすべて解除しますか？");
+
+  if (!ok) return;
+
+  cards.forEach((card) => {
+    card.mistake = false;
+  });
+
+  saveCardData();
+
+  alert("すべてのチェックを解除しました");
+});
+
 function normalize(text) {
   return text.toLowerCase().normalize("NFKC");
 }
