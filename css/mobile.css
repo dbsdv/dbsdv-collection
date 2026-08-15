@@ -15,6 +15,21 @@
     margin-bottom: 18px;
   }
 
+  .search-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 10px;
+  }
+
+  .search-options label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
   /* ==========================
    フィルター
 ========================== */
