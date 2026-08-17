@@ -10,6 +10,15 @@ const version = JSON.parse(fs.readFileSync(versionPath, "utf8"));
 // build を +1
 version.build = (version.build ?? 0) + 1;
 
+const now = new Date();
+
+// 更新日時を設定
+version.updated =
+  `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()} ` +
+  `${String(now.getHours()).padStart(2, "0")}:` +
+  `${String(now.getMinutes()).padStart(2, "0")}:` +
+  `${String(now.getSeconds()).padStart(2, "0")}`;
+
 // 保存
 fs.writeFileSync(versionPath, JSON.stringify(version, null, 2) + "\n", "utf8");
 

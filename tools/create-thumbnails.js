@@ -14,11 +14,15 @@ async function createThumbnails() {
     .readdirSync(inputDir)
     .filter((file) => file.endsWith(".webp"));
 
-  console.log(`${files.length}枚の画像を処理します`);
+  console.log(`${files.length}枚の画像を確認しています`);
 
   for (const file of files) {
     const inputPath = path.join(inputDir, file);
     const outputPath = path.join(outputDir, file);
+
+    if (fs.existsSync(outputPath)) {
+      continue;
+    }
 
     await sharp(inputPath)
       .resize({
@@ -35,4 +39,4 @@ async function createThumbnails() {
   console.log("サムネイルの生成が完了しました！");
 }
 
-createThumbnails().catch(console.error);
+module.exports = createThumbnails;
