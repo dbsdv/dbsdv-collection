@@ -143,6 +143,8 @@ document.getElementById("excelFile").addEventListener("change", (e) => {
         series = normalizeCell(series);
         number = normalizeCell(number);
 
+        const suffix = parallel ? "p_1" : "";
+
         // 数字シリーズ
         if (/^\d+$/.test(series)) {
           if (/^\d+$/.test(number)) {
@@ -157,8 +159,6 @@ document.getElementById("excelFile").addEventListener("change", (e) => {
             count: count ? Number(count) : 1,
           };
         }
-
-        const suffix = parallel ? "p_1" : "";
 
         // SDVP / SDVPJ など
         if (/^[A-Z0-9]+$/.test(series)) {
