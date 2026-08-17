@@ -105,20 +105,30 @@
           <div class="filter-row option-row">
             <label>
               <input type="checkbox" id="parallelOnly" />
-              パラレルのみ
+              パラレル
             </label>
 
             <label>
               <input type="checkbox" id="ownedOnly" />
-              所持カードのみ表示
+              所持カード
             </label>
 
             <label>
               <input type="checkbox" id="wantedOnly" />
-              探しているカードのみ
+              探しているカード
             </label>
+
+              <label>
+    <input type="checkbox" id="duplicateOnly" />
+    2枚以上のカード
+  </label>
           </div>
 
+<div class="print-row">
+<button id="pdfCardsButton">
+  📄 PDF
+</button>
+</div>
           <div class="result-row">
             <span id="resultCount"></span>
           </div>
@@ -657,6 +667,8 @@
       <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
       <script src="js/core/app.js"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/jspdf@3.0.3/dist/jspdf.umd.min.js"></script>
 
 <script>
 

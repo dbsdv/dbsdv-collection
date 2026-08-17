@@ -211,6 +211,10 @@ async function loadCards() {
     renderCards();
   });
 
+  document.getElementById("duplicateOnly").addEventListener("change", () => {
+    renderCards();
+  });
+
   document.getElementById("wantedOnly").addEventListener("change", (e) => {
     const seriesFilter = document.getElementById("seriesFilter");
 
@@ -252,6 +256,7 @@ async function loadCards() {
     document.getElementById("rarityFilter").value = "";
     document.getElementById("parallelOnly").checked = false;
     document.getElementById("ownedOnly").checked = false;
+    document.getElementById("duplicateOnly").checked = false;
     document.getElementById("wantedOnly").checked = false;
     document.getElementById("search").value = "";
     document.getElementById("typeFilter").value = "";
@@ -428,6 +433,8 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
 
   const wantedOnly = document.getElementById("wantedOnly").checked;
 
+  const duplicateOnly = document.getElementById("duplicateOnly").checked;
+
   const searchInput =
     mode === "select"
       ? document.getElementById("deckSearch")
@@ -447,6 +454,7 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
     !actionSkillFilter &&
     !parallelOnly &&
     !ownedOnly &&
+    !duplicateOnly &&
     !wantedOnly &&
     keywords.length === 0
   ) {
@@ -506,6 +514,10 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
     }
 
     if (ownedOnly && !card.owned) {
+      return;
+    }
+
+    if (duplicateOnly && card.count < 2) {
       return;
     }
 
@@ -659,4 +671,94 @@ function renderDeckCards() {
   console.log("series=", JSON.stringify(series));
 
   renderCards("editorCardList", "select", series);
+}
+
+//pdf
+document.getElementById("pdfCardsButton").addEventListener("click", () => {
+  const cardsToExport = window.currentVisibleCards ?? [];
+
+  if (!cardsToExport.length) {
+    alert("出力するカードがありません");
+    return;
+  }
+
+  alert(`${cardsToExport.length}枚をPDF化します`);
+
+  createPdf();
+});
+async function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+
+    img.onload = () => {
+      console.log("OK:", src);
+      resolve(img);
+    };
+
+    img.onerror = () => {
+      console.log("NG:", src);
+      reject();
+    };
+
+    img.src = src;
+  });
+}
+async function createPdf() {
+  const cardsToExport = window.currentVisibleCards ?? [];
+
+  if (!cardsToExport.length) {
+    alert("出力するカードがありません");
+    return;
+  }
+
+  const { jsPDF } = window.jspdf;
+
+  const pdf = new jsPDF({
+    orientation: "portrait",
+    unit: "mm",
+    format: "a4",
+  });
+
+  const cardWidth = 36;
+  const cardHeight = 50;
+
+  const columns = 5;
+
+  let x = 10;
+  let y = 10;
+
+  for (let i = 0; i < cardsToExport.length; i++) {
+    const card = cardsToExport[i];
+
+    const img = await loadImage(`images/front/${card.id}.webp`);
+
+    const canvas = document.createElement("canvas");
+
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+
+    const ctx = canvas.getContext("2d");
+
+    ctx.drawImage(img, 0, 0);
+
+    const imageData = canvas.toDataURL("image/jpeg", 1.0);
+
+    pdf.addImage(imageData, "JPEG", x, y, cardWidth, cardHeight);
+
+    x += cardWidth + 2;
+
+    if ((i + 1) % columns === 0) {
+      x = 10;
+      y += cardHeight + 2;
+    }
+
+    if (y + cardHeight > 280 && i < cardsToExport.length - 1) {
+      pdf.addPage();
+
+      x = 10;
+      y = 10;
+    }
+  }
+
+  pdf.save("cards.pdf");
 }

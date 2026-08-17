@@ -12,6 +12,7 @@ ownedOnly.addEventListener("change", filterCards);
 (async () => {
   await loadCards();
 
+  loadCardData();
   loadDecks();
   loadAvatarSettings();
 
