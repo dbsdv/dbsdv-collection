@@ -137,7 +137,7 @@ document.getElementById("excelFile").addEventListener("change", (e) => {
         : rows;
 
     const ids = dataRows
-      .map(([series, number, count]) => {
+      .map(([series, number, count, parallel]) => {
         if (series == null || number == null) return null;
 
         series = normalizeCell(series);
@@ -147,27 +147,32 @@ document.getElementById("excelFile").addEventListener("change", (e) => {
         if (/^\d+$/.test(series)) {
           if (/^\d+$/.test(number)) {
             return {
-              id: `SDV${series}-${number.padStart(3, "0")}`,
+              id: `SDV${series}-${number.padStart(3, "0")}${suffix}`,
               count: count ? Number(count) : 1,
             };
           }
 
           return {
-            id: `SDV${series}-${number}`,
+            id: `SDV${series}-${number}${suffix}`,
             count: count ? Number(count) : 1,
           };
         }
+
+        const suffix = parallel ? "p_1" : "";
 
         // SDVP / SDVPJ など
         if (/^[A-Z0-9]+$/.test(series)) {
           if (/^\d+$/.test(number)) {
             return {
-              id: `${series}-${number.padStart(3, "0")}`,
+              id: `${series}-${number.padStart(3, "0")}${suffix}`,
               count: count ? Number(count) : 1,
             };
           }
 
-          return `${series}-${number}`;
+          return {
+            id: `${series}-${number}${suffix}`,
+            count: count ? Number(count) : 1,
+          };
         }
 
         return null;
