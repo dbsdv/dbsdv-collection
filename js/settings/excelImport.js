@@ -4,7 +4,9 @@ let excelImportCards = [];
 let cardMap = new Map();
 
 function hideExcelImportModal() {
-  document.getElementById("excelImportModal").hidden = true;
+  const modal = document.getElementById("excelImportModal");
+
+  modal.style.display = "none";
 }
 
 function createImportCard(importCard) {
@@ -100,7 +102,7 @@ function showExcelImportModal(importCards, unknownCards) {
 
   list.appendChild(createSummary(importCards, unknownCards));
 
-  modal.hidden = false;
+  modal.style.display = "flex";
 }
 
 document
