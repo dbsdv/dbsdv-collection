@@ -673,7 +673,7 @@ function renderDeckCards() {
   renderCards("editorCardList", "select", series);
 }
 
-//pdf
+// PDF
 document.getElementById("pdfCardsButton").addEventListener("click", () => {
   const cardsToExport = window.currentVisibleCards ?? [];
 
@@ -682,27 +682,26 @@ document.getElementById("pdfCardsButton").addEventListener("click", () => {
     return;
   }
 
-  alert(`${cardsToExport.length}枚をPDF化します`);
+  alert(
+    `${cardsToExport.length}枚をPDF化します。
+
+※カード枚数によっては時間がかかる場合があります。`,
+  );
 
   createPdf();
 });
+
 async function loadImage(src) {
   return new Promise((resolve, reject) => {
     const img = new Image();
 
-    img.onload = () => {
-      console.log("OK:", src);
-      resolve(img);
-    };
-
-    img.onerror = () => {
-      console.log("NG:", src);
-      reject();
-    };
+    img.onload = () => resolve(img);
+    img.onerror = () => reject();
 
     img.src = src;
   });
 }
+
 async function createPdf() {
   const cardsToExport = window.currentVisibleCards ?? [];
 
@@ -721,7 +720,6 @@ async function createPdf() {
 
   const cardWidth = 36;
   const cardHeight = 50;
-
   const columns = 5;
 
   let x = 10;
@@ -760,24 +758,15 @@ async function createPdf() {
     }
   }
 
-  alert("PDFを生成しました");
-
   const blob = pdf.output("blob");
-
-  alert("Blobを作成しました");
-
   const url = URL.createObjectURL(blob);
-
-  alert("URLを作成しました");
 
   const a = document.createElement("a");
 
   a.href = url;
-  a.download = "cards.pdf";
+  window.open(url, "_blank");
 
   document.body.appendChild(a);
-
-  alert("ダウンロードを開始します");
 
   a.click();
 
