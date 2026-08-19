@@ -760,9 +760,15 @@ async function createPdf() {
     }
   }
 
+  alert("PDFを生成しました");
+
   const blob = pdf.output("blob");
 
+  alert("Blobを作成しました");
+
   const url = URL.createObjectURL(blob);
+
+  alert("URLを作成しました");
 
   const a = document.createElement("a");
 
@@ -770,6 +776,8 @@ async function createPdf() {
   a.download = "cards.pdf";
 
   document.body.appendChild(a);
+
+  alert("ダウンロードを開始します");
 
   a.click();
 
