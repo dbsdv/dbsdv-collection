@@ -63,17 +63,13 @@
     font-size: 15px;
   }
 
-  #resetFilter {
-    grid-column: 1 / -1;
-  }
-
   /* チェックボックス */
 
   .option-row {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    align-items: center;
   }
 
   #resultCount {

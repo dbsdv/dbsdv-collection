@@ -1,37 +1,41 @@
 function filterCards() {
+  const keyword = search.value.toLowerCase();
+  const energyFilter = document.getElementById("energyFilter").value;
 
-    const keyword = search.value.toLowerCase();
+  filteredCards = [];
 
-    filteredCards = [];
+  document.querySelectorAll(".card").forEach((cardDiv, index) => {
+    const card = cards[index];
 
+    let visible = true;
 
-    document.querySelectorAll(".card").forEach((cardDiv, index) => {
+    // 検索
+    if (
+      !card.name.toLowerCase().includes(keyword) &&
+      !card.id.toLowerCase().includes(keyword)
+    ) {
+      visible = false;
+    }
 
-        const card = cards[index];
+    // 所持のみ
+    if (ownedOnly.checked && !card.owned) {
+      visible = false;
+    }
 
-        let visible = true;
+    // 気力
+    if (energyFilter && Number(card.initialKi) < Number(energyFilter)) {
+      visible = false;
+    }
 
-        // 検索
-        if (
-            !card.name.toLowerCase().includes(keyword) &&
-            !card.id.toLowerCase().includes(keyword)
-        ) {
-            visible = false;
-        }
+    cardDiv.style.display = visible ? "" : "none";
 
-        // 所持のみ
-        if (ownedOnly.checked && !card.owned) {
-            visible = false;
-        }
+    if (visible) {
+      filteredCards.push(card);
+    }
+  });
 
-        cardDiv.style.display = visible ? "" : "none";
+  window.currentFilteredCards = filteredCards;
 
-        if (visible) {
-            filteredCards.push(card);
-        }
-
-    });
-
-    window.currentFilteredCards = filteredCards;
-
+  document.getElementById("resultCount").textContent =
+    `表示中：${filteredCards.length}枚（全${cards.length}枚）`;
 }

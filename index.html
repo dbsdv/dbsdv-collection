@@ -98,31 +98,38 @@
                 <option value="">すべてのアクションスキル</option>
               </select>
 
+              <select id="energyFilter">
+  <option value="">すべての気力</option>
+  <option value="1">気力 1.0〜</option>
+  <option value="2">気力 2.0〜</option>
+  <option value="3">気力 3.0〜</option>
+</select>
+
               <button id="resetFilter">リセット</button>
             </div>
           </div>
 
           <div class="filter-row option-row">
-            <label>
-              <input type="checkbox" id="parallelOnly" />
-              パラレル
-            </label>
+  <label>
+    <input type="checkbox" id="parallelOnly" />
+    パラレル
+  </label>
 
-            <label>
-              <input type="checkbox" id="ownedOnly" />
-              所持カード
-            </label>
-
-            <label>
-              <input type="checkbox" id="wantedOnly" />
-              探しているカード
-            </label>
-
-              <label>
+  <label>
     <input type="checkbox" id="duplicateOnly" />
     2枚以上のカード
   </label>
-          </div>
+
+  <label>
+    <input type="checkbox" id="ownedOnly" />
+    所持カード
+  </label>
+
+  <label>
+    <input type="checkbox" id="wantedOnly" />
+    探しているカード
+  </label>
+</div>
 
 <div class="print-row">
 <button id="pdfCardsButton">

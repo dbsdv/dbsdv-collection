@@ -5,9 +5,11 @@ let filteredCards = [];
 
 const search = document.getElementById("search");
 const ownedOnly = document.getElementById("ownedOnly");
+const energyFilter = document.getElementById("energyFilter");
 
 search.addEventListener("input", filterCards);
 ownedOnly.addEventListener("change", filterCards);
+energyFilter.addEventListener("change", filterCards);
 
 (async () => {
   await loadCards();

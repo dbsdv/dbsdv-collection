@@ -210,7 +210,7 @@ function renderEditorSlots() {
     id="avatarSlot"
     style="color:${avatarColor};"
   >
-    ${editingDeck.avatarType || ""}
+    ${editingDeck.avatarType || "👤"}
   </div>
 `;
 
