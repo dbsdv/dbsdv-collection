@@ -353,3 +353,24 @@
   font-size: 12px;
   font-weight: bold;
 }
+
+@media (max-width: 600px) {
+  .master-pupil-header {
+    flex-wrap: wrap;
+  }
+
+  .master-pupil-toggle {
+    flex-shrink: 0;
+  }
+
+  .master-pupil-name {
+    flex: 1;
+  }
+
+  .master-pupil-level {
+    width: 100%;
+    margin-top: 8px;
+
+    justify-content: center;
+  }
+}
