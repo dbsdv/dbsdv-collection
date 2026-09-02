@@ -14,7 +14,8 @@ function backupData() {
         key === "cardData" ||
         key === "decks" ||
         key === "unopenedPacks" ||
-        key === "avatarSettings"
+        key === "avatarSettings" ||
+        key === "masterPupilLevels"
       ) {
         backup.data[key] = JSON.parse(localStorage.getItem(key));
       }
@@ -51,7 +52,13 @@ function createAutoBackup() {
     data: {},
   };
 
-  ["cardData", "decks", "unopenedPacks", "avatarSettings"].forEach((key) => {
+  [
+    "cardData",
+    "decks",
+    "unopenedPacks",
+    "avatarSettings",
+    "masterPupilLevels",
+  ].forEach((key) => {
     const value = localStorage.getItem(key);
 
     if (value) {

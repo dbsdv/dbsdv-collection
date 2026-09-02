@@ -2,12 +2,14 @@ const cardsPage = document.getElementById("cardsPage");
 const deckPage = document.getElementById("deckPage");
 const collectionPage = document.getElementById("collectionPage");
 const unopenedPage = document.getElementById("unopenedPage");
+const masterPupilPage = document.getElementById("masterPupilPage");
 const settingsPage = document.getElementById("settingsPage");
 
 const tabCards = document.getElementById("tabCards");
 const tabDeck = document.getElementById("tabDeck");
 const tabCollection = document.getElementById("tabCollection");
 const tabUnopened = document.getElementById("tabUnopened");
+const tabMasterPupil = document.getElementById("tabMasterPupil");
 const tabSettings = document.getElementById("tabSettings");
 
 function showPage(page) {
@@ -15,12 +17,14 @@ function showPage(page) {
   deckPage.hidden = true;
   collectionPage.hidden = true;
   unopenedPage.hidden = true;
+  masterPupilPage.hidden = true;
   settingsPage.hidden = true;
 
   tabCards.classList.remove("active");
   tabDeck.classList.remove("active");
   tabCollection.classList.remove("active");
   tabUnopened.classList.remove("active");
+  tabMasterPupil.classList.remove("active");
   tabSettings.classList.remove("active");
 
   if (page === "cards") {
@@ -35,6 +39,9 @@ function showPage(page) {
   } else if (page === "unopened") {
     unopenedPage.hidden = false;
     tabUnopened.classList.add("active");
+  } else if (page === "masterPupil") {
+    masterPupilPage.hidden = false;
+    tabMasterPupil.classList.add("active");
   } else if (page === "settings") {
     settingsPage.hidden = false;
     tabSettings.classList.add("active");
@@ -72,6 +79,11 @@ tabSettings.addEventListener("click", () => {
 tabUnopened.addEventListener("click", () => {
   console.log("未開封クリック");
   showPage("unopened");
+});
+
+tabMasterPupil.addEventListener("click", () => {
+  console.log("師弟レベルクリック");
+  showPage("masterPupil");
 });
 
 const lastPage = sessionStorage.getItem("lastPage");

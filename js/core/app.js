@@ -14,6 +14,8 @@ energyFilter.addEventListener("change", filterCards);
 (async () => {
   await loadCards();
 
+  renderMasterPupil();
+
   loadCardData();
   loadDecks();
   loadAvatarSettings();

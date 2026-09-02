@@ -9,6 +9,8 @@ const modalName = document.getElementById("modalName");
 const modalNumber = document.getElementById("modalNumber");
 const modalRarity = document.getElementById("modalRarity");
 
+const modalForm = document.getElementById("modalForm");
+
 const modalType = document.getElementById("modalType");
 const modalAttackType = document.getElementById("modalAttackType");
 
@@ -108,6 +110,7 @@ function showCardDetail(card, list = cards) {
   showBackBtn.disabled = !showingFront;
 
   modalName.textContent = card.name || "-";
+  modalForm.textContent = card.form || "";
 
   document.getElementById("modalNumberMobile").textContent = card.id || "-";
 

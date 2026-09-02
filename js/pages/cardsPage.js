@@ -300,6 +300,8 @@ async function loadCards() {
     unopenedPacks = [];
     renderUnopenedPacks();
 
+    localStorage.removeItem("masterPupilLevels");
+
     localStorage.removeItem("avatarSettings");
 
     document.getElementById("avatarHp").value = 0;
@@ -456,7 +458,9 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
     !ownedOnly &&
     !duplicateOnly &&
     !wantedOnly &&
-    keywords.length === 0
+    keywords.length === 0 &&
+    !selectedCharacterName &&
+    !selectedForm
   ) {
     const cardsElement = document.getElementById("cards");
 
@@ -484,6 +488,15 @@ function renderCards(targetId = "cards", mode = "detail", deckSeries = "") {
 
   cards.forEach((card) => {
     if (seriesFilter && card.series !== seriesFilter) {
+      return;
+    }
+
+    // キャラクター詳細検索
+    if (selectedCharacterName && card.name !== selectedCharacterName) {
+      return;
+    }
+
+    if (selectedForm && card.form !== selectedForm) {
       return;
     }
 

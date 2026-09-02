@@ -1,3 +1,57 @@
+let selectedCharacterName = "";
+let selectedForm = "";
+
+const formSearchArea = document.getElementById("formSearchArea");
+const formSearchSelect = document.getElementById("formSearchSelect");
+
+search.addEventListener("input", () => {
+  const keyword = search.value.trim();
+
+  selectedCharacterName = "";
+  selectedForm = "";
+
+  formSearchSelect.innerHTML = `
+    <option value="">形態を選択</option>
+  `;
+
+  formSearchArea.hidden = true;
+
+  const forms = [
+    ...new Set(
+      cards
+        .filter((card) => card.name === keyword && card.form)
+        .map((card) => card.form),
+    ),
+  ];
+
+  if (forms.length > 0) {
+    selectedCharacterName = keyword;
+
+    formSearchSelect.innerHTML = `
+      <option value="">形態を選択</option>
+      ${forms
+        .map(
+          (form) => `
+            <option value="${form}">
+              ${form}
+            </option>
+          `,
+        )
+        .join("")}
+    `;
+
+    formSearchArea.hidden = false;
+  }
+
+  renderCards();
+});
+
+formSearchSelect.addEventListener("change", () => {
+  selectedForm = formSearchSelect.value;
+
+  renderCards();
+});
+
 function filterCards() {
   const keyword = search.value.toLowerCase();
   const energyFilter = document.getElementById("energyFilter").value;

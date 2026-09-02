@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/modal.css" />
     <link rel="stylesheet" href="css/unopened.css">
+    <link rel="stylesheet" href="css/master-pupil.css" />
   </head>
 
   <body>
@@ -104,6 +105,12 @@
   <option value="2">気力 2.0〜</option>
   <option value="3">気力 3.0〜</option>
 </select>
+
+<div id="formSearchArea" hidden>
+  <select id="formSearchSelect">
+    <option value="">形態を選択</option>
+  </select>
+</div>
 
               <button id="resetFilter">リセット</button>
             </div>
@@ -298,6 +305,21 @@
         <div id="unopenedPackList"></div>
       </section>
 
+      <section id="masterPupilPage" hidden>
+  <h2>🎓 師弟レベル</h2>
+
+          <div class="master-pupil-search">
+  <input
+    type="text"
+    id="masterPupilSearch"
+    placeholder="キャラクター名で検索"
+  />
+</div>
+
+  <div id="masterPupilList"></div>
+</section>
+
+
       <section id="settingsPage" hidden>
         <h2>⚙️ 設定</h2>
 
@@ -447,20 +469,23 @@
           <!-- 右 -->
 
           <div class="modal-right">
-            <div class="name-rarity">
-              <h2 id="modalName"></h2>
+            
+<div class="name-rarity">
+  <div class="name-rarity-top">
+    <h2 id="modalName"></h2>
 
-              <span id="modalRarity"></span>
-
+    <span id="modalRarity"></span>
+  </div>
                <label class="mistake-label">
     <input type="checkbox" id="modalMistake">
     要修正
   </label>
 
-              <div class="card-header-info">
-                <span id="modalNumber"></span>
-              </div>
             </div>
+
+              <div class="modal-form">
+    <span id="modalForm"></span>
+  </div>
 
 <div class="owned-section">
   <div class="owned-row">
@@ -615,31 +640,30 @@
 </div>
 
     <nav class="bottom-nav">
-      <button id="tabCards" class="active">
-        📖<br />
-        図鑑
-      </button>
+  <button id="tabCards" class="active" title="図鑑">
+    📖
+  </button>
 
-      <button id="tabDeck">
-        🃏<br />
-        デッキ
-      </button>
+  <button id="tabDeck" title="デッキ">
+    🃏
+  </button>
 
-      <button id="tabCollection">
-        📊<br />
-        コレクション
-      </button>
+  <button id="tabCollection" title="コレクション">
+    📊
+  </button>
 
-      <button id="tabUnopened">
-        📦<br />
-        未開封
-      </button>
+  <button id="tabUnopened" title="未開封">
+    📦
+  </button>
 
-      <button id="tabSettings">
-        ⚙️<br />
-        設定
-      </button>
-    </nav>
+  <button id="tabMasterPupil" title="師弟レベル">
+    🎓
+  </button>
+
+  <button id="tabSettings" title="設定">
+    ⚙️
+  </button>
+</nav>
 
     <div id="excelImportModal" class="modal" hidden>
   <div class="modal-content">
@@ -665,7 +689,7 @@
       <script src="js/pages/collectionPage.js"></script>
       <script src="js/pages/decksPage.js"></script>
       <script src="js/pages/unopenedPage.js"></script>
-
+<script src="js/pages/masterPupilPage.js"></script>
       <script src="js/core/navigation.js"></script>
 
       <script src="js/settings/backup.js"></script>
