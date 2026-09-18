@@ -9,7 +9,7 @@ const typeNames = {
 };
 
 async function loadCards() {
-  const filesResponse = await fetch("/api/data-files");
+  const filesResponse = await fetch("data/index.json");
   const files = await filesResponse.json();
 
   const responses = await Promise.all(
