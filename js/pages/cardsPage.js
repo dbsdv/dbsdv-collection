@@ -14,7 +14,7 @@ async function loadCards() {
 
   const responses = await Promise.all(
     files.map((file) =>
-      fetch(`/data/${file}`).then((response) => response.json()),
+      fetch(`data/${file}`).then((response) => response.json()),
     ),
   );
 
