@@ -10,8 +10,6 @@ const multer = require("multer");
 
 const fs = require("fs");
 
-const { readCardNumbers } = require("./tools/ocrClient");
-
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "temp"),
 
@@ -33,6 +31,16 @@ app.get("/api/test", (req, res) => {
     success: true,
     message: "Server OK",
   });
+});
+
+app.get("/api/data-files", (req, res) => {
+  const dataDir = path.join(__dirname, "data");
+
+  const files = fs
+    .readdirSync(dataDir)
+    .filter((file) => file.endsWith(".json"));
+
+  res.json(files);
 });
 
 app.post("/api/cardnumbers", upload.single("image"), async (req, res) => {

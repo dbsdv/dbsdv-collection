@@ -9,9 +9,16 @@ const typeNames = {
 };
 
 async function loadCards() {
-  const response = await fetch("cards.json");
+  const filesResponse = await fetch("/api/data-files");
+  const files = await filesResponse.json();
 
-  cards = await response.json();
+  const responses = await Promise.all(
+    files.map((file) =>
+      fetch(`/data/${file}`).then((response) => response.json()),
+    ),
+  );
+
+  cards = responses.flat();
 
   cards.forEach((card) => {
     card.searchText = normalize(`
@@ -144,7 +151,7 @@ async function loadCards() {
 
   loadCardData();
 
-  latestSeries = seriesList[0];
+  latestSeries = "12弾";
   document.getElementById("seriesFilter").value = latestSeries;
 
   renderCards();
