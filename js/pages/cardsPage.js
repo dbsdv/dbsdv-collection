@@ -85,6 +85,7 @@ async function loadCards() {
 
   seriesList.sort((a, b) => {
     const order = {
+      "12弾": 12,
       "11弾": 11,
       "10弾": 10,
       "9弾": 9,
@@ -388,6 +389,7 @@ const promoCategories = [
   { keyword: "店頭", category: "店頭配布" },
   { keyword: "キャンペーン", category: "キャンペーン" },
   { keyword: "イベント", category: "イベント" },
+  { keyword: "ムービーポスター", category: "ムービーポスター" },
 ];
 
 function getPromoCategory(acquisition = "") {
